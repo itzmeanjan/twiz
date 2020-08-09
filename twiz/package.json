@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/itzmeanjan/twiz/issues"
   },
-  "homepage": "https://github.com/itzmeanjan/twiz#readme"
+  "homepage": "https://github.com/itzmeanjan/twiz#readme",
+  "dependencies": {
+    "unzip": "^0.1.11"
+  }
 }
