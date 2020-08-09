@@ -1,0 +1,26 @@
+{
+  "name": "twiz",
+  "version": "0.1.0",
+  "description": "Your Twitter account data analysis & visualization tool <3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itzmeanjan/twiz.git"
+  },
+  "keywords": [
+    "twitter",
+    "data",
+    "analysis",
+    "dataviz",
+    "visualization"
+  ],
+  "author": "Anjan Roy <anjanroy@yandex.com>",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/itzmeanjan/twiz/issues"
+  },
+  "homepage": "https://github.com/itzmeanjan/twiz#readme"
+}
