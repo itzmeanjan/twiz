@@ -3,7 +3,7 @@
 from typing import List, Dict, Any
 
 
-def getFollowers(data: List[Dict[str, Any]]):
+def getFollowers(data: List[Dict[str, Any]]) -> map:
     '''
         Obtains a list of followers, where each of them will be a
         tuple of accountId & corresponding user's account link
