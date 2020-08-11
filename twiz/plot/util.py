@@ -19,8 +19,31 @@ def _prepareDataForPlottingFollowersAndFollowings(followers: map, followings: ma
     return [('Followers', followerCount), ('Followings', followingCount), ('Followers followed by YOU', followedFollowers)]
 
 
-def plotFollowersAndFollowings():
-    pass
+def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink: str) -> bool:
+    '''
+        Plotting follower & following data as bar chart
+    '''
+    try:
+        _data = _prepareDataForPlottingFollowersAndFollowings(followers,
+                                                              followings)
+
+        _x = [i[0] for i in _data]
+        _y = [i[1] for i in _data]
+
+        fig = plt.Figure(figsize=(16, 9), dpi=100)
+
+        sns.set_style('darkgrid')
+
+        sns.barplot(x=_x, y=_y, ax=fig.gca())
+        fig.gca().set_ylabel('Count')
+        fig.gca().set_title(title, fontsize=22)
+
+        fig.savefig(sink, pad_inches=.5)
+        plt.close(fig)
+
+        return True
+    except Exception:
+        return False
 
 
 if __name__ == '__main__':
