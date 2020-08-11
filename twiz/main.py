@@ -2,7 +2,12 @@
 
 from argparse import ArgumentParser
 from typing import Tuple
-from os.path import exists, abspath
+from os.path import exists, abspath, join
+from .extract import extract
+from .parser import parse
+from .model.follower import getFollowers
+from .model.following import getFollowings
+from .model.manip import getBothFollowersAndFollowings
 
 
 def _getCMD() -> Tuple[str, str]:
@@ -23,6 +28,21 @@ def main():
         src, sink = _getCMD()
         if not exists(src):
             raise RuntimeError('Source file absent')
+
+        if not extract(src, sink):
+            raise RuntimeError('Failed to extract source')
+
+        _parsedFollowers = parse(join(sink, 'data/follower.js'))
+        if not _parsedFollowers:
+            raise RuntimeError('Failed to parse followers')
+
+        _parsedFollowings = parse(join(sink, 'data/following.js'))
+        if not _parsedFollowings:
+            raise RuntimeError('Failed to parse followings')
+
+        _followers = getFollowers(_parsedFollowers)
+        _followings = getFollowings(_parsedFollowings)
+        print(getBothFollowersAndFollowings(_followers, _followings))
 
     except KeyboardInterrupt:
         print('\n[!]Terminated')
