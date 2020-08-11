@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
-def getBothFollowersAndFollowings(followings: map, followers: map):
+from typing import Set
+
+
+def getBothFollowersAndFollowings(followings: map, followers: map) -> Set[str]:
     '''
         Computes list of those followings who you follow back or in other terms
         followers whom you follow too
