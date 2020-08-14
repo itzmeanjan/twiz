@@ -7,6 +7,7 @@ from .extract import extract, makeDirectory
 from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
+from .model.account import getAccountDisplayName
 from .plot.util import plotFollowersAndFollowings
 from time import time
 
@@ -32,6 +33,10 @@ def _banner():
     print('\x1b[1;6;36;49m[+]twiz v0.1.0 - Your Twitter Account Data Analysis & Visualization Tool <3\x1b[0m\n\n\t\x1b[3;39;40m$ twiz `path-to-zip-file` `path-to-sink-directory`\x1b[0m\n\n[+]Author: Anjan Roy <anjanroy@yandex.com>\n[+]Source: https://github.com/itzmeanjan/twiz ( CC0-1.0 Licensed )\n')
 
 
+def _joinName(name: str) -> str:
+    return '_'.join(name.split())
+
+
 def main():
     _banner()
 
@@ -54,15 +59,22 @@ def main():
         if not _parsedFollowings:
             raise RuntimeError('Failed to parse followings')
 
+        _account = parse(join(sink, 'data/account.js'))
+        if not _account:
+            raise RuntimeError('Failed to parse account')
+
         _followers = getFollowers(_parsedFollowers)
         _followings = getFollowings(_parsedFollowings)
+        _accountDisplayName = getAccountDisplayName(_account)
         makeDirectory('plots')
 
         _success = [
             plotFollowersAndFollowings(_followers,
                                        _followings,
-                                       'Twitter Followers And Followings Per Cent',
-                                       'plots/twitterFollowersAndFollowingsPerCent.png')
+                                       'Twitter Followers And Followings Per Cent for {}'
+                                       .format(_accountDisplayName),
+                                       'plots/twitterFollowersAndFollowingsPerCentFor{}.png'
+                                       .format(_joinName(_accountDisplayName)))
         ]
 
         print('[+]Obtained success : {:.2f} %, in {} s'.format(
