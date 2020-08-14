@@ -8,6 +8,7 @@ from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
 from .plot.util import plotFollowersAndFollowings
+from time import time
 
 
 def _getCMD() -> Tuple[str, str]:
@@ -43,6 +44,7 @@ def main():
             raise RuntimeError('Failed to extract from source')
 
         print('[+]Working ...')
+        _start = time()
 
         _parsedFollowers = parse(join(sink, 'data/follower.js'))
         if not _parsedFollowers:
@@ -63,7 +65,9 @@ def main():
                                        'plots/twitterFollowersAndFollowingsPerCent.png')
         ]
 
-        print('[+]Success: {:.2f} %'.format(_calculateSuccess(_success)))
+        print('[+]Obtained success : {:.2f} %, in {} s'.format(
+            _calculateSuccess(_success),
+            time() - _start))
     except KeyboardInterrupt:
         print('\n[!]Terminated')
     except Exception as e:
