@@ -12,7 +12,7 @@ def getFollowedFollowers(followers: map, followings: map) -> Set[str]:
         set(map(lambda e: e[0], followings)))
 
 
-def getFollowersAndFollowingsPerCent(followers: map, followings: map) -> List[float, float]:
+def getFollowersAndFollowingsPerCent(followers: map, followings: map) -> List[float]:
     '''
         Scaling down number of followers & followings to 100 i.e. per cent of each of these categories
     '''

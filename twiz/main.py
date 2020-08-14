@@ -3,7 +3,7 @@
 from argparse import ArgumentParser
 from typing import Tuple, List
 from os.path import exists, abspath, join
-from .extract import extract
+from .extract import extract, makeDirectory
 from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
@@ -48,12 +48,13 @@ def main():
 
         _followers = getFollowers(_parsedFollowers)
         _followings = getFollowings(_parsedFollowings)
+        makeDirectory('plots')
 
         _success = [
             plotFollowersAndFollowings(_followers,
                                        _followings,
                                        'Twitter Followers And Followings Per Cent',
-                                       'twitterFollowersAndFollowingsPerCent.png')
+                                       'plots/twitterFollowersAndFollowingsPerCent.png')
         ]
 
         print('[+]Success: {:.2f} %'.format(_calculateSuccess(_success)))

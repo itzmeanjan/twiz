@@ -9,7 +9,6 @@ author-email = "anjanroy@yandex.com"
 home-page = "https://itzmeanjan.github.io/twiz"
 classifiers = [
     "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: CC0-1.0 License",
     "Programming Language :: Python :: 3"
 ]
 requires = ["matplotlib", "seaborn"]
