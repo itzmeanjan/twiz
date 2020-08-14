@@ -4,7 +4,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from typing import List, Tuple
 from copy import deepcopy
-from ..model.manip import getBothFollowersAndFollowings
+from ..model.manip import getFollowedFollowers
 
 
 def _prepareDataForPlottingFollowersAndFollowings(followers: map, followings: map) -> List[Tuple[str, int]]:
@@ -13,8 +13,8 @@ def _prepareDataForPlottingFollowersAndFollowings(followers: map, followings: ma
     '''
     followerCount = len(list(deepcopy(followers)))
     followingCount = len(list(deepcopy(followings)))
-    followedFollowers = len(getBothFollowersAndFollowings(followings,
-                                                          followers))
+    followedFollowers = len(getFollowedFollowers(followers,
+                                                 followings))
 
     return [('Followers', followerCount), ('Followings', followingCount), ('Followers followed by YOU', followedFollowers)]
 
