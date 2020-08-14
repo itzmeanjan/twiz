@@ -4,10 +4,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from typing import List, Tuple
 from copy import deepcopy
-from ..model.manip import (
-    getFollowedFollowers,
-    getFollowersAndFollowingsPerCent
-)
+from ..model.manip import getFollowersAndFollowingsPerCent
 
 
 def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink: str) -> bool:

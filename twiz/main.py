@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
 from argparse import ArgumentParser
-from typing import Tuple
+from typing import Tuple, List
 from os.path import exists, abspath, join
 from .extract import extract
 from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
-from .model.manip import getBothFollowersAndFollowings
+from .plot.util import plotFollowersAndFollowings
 
 
 def _getCMD() -> Tuple[str, str]:
@@ -23,6 +23,10 @@ def _getCMD() -> Tuple[str, str]:
     return (abspath(args.src[0]), abspath(args.sink[0]))
 
 
+def _calculateSuccess(_data: List[bool]) -> float:
+    return (len(list(filter(lambda e: e, _data))) / len(_data)) * 100
+
+
 def main():
     try:
         src, sink = _getCMD()
@@ -30,7 +34,9 @@ def main():
             raise RuntimeError('Source file absent')
 
         if not extract(src, sink):
-            raise RuntimeError('Failed to extract source')
+            raise RuntimeError('Failed to extract from source')
+
+        print('[+]Working ...')
 
         _parsedFollowers = parse(join(sink, 'data/follower.js'))
         if not _parsedFollowers:
@@ -42,8 +48,15 @@ def main():
 
         _followers = getFollowers(_parsedFollowers)
         _followings = getFollowings(_parsedFollowings)
-        print(getBothFollowersAndFollowings(_followers, _followings))
 
+        _success = [
+            plotFollowersAndFollowings(_followers,
+                                       _followings,
+                                       'Twitter Followers And Followings Per Cent',
+                                       'twitterFollowersAndFollowingsPerCent.png')
+        ]
+
+        print('[+]Success: {:.2f} %'.format(_calculateSuccess(_success)))
     except KeyboardInterrupt:
         print('\n[!]Terminated')
     except Exception as e:
