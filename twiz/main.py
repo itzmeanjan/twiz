@@ -7,6 +7,7 @@ from .extract import extract, makeDirectory
 from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
+from .model.account import getAccountDisplayName
 from .plot.util import plotFollowersAndFollowings
 from time import time
 
@@ -54,15 +55,22 @@ def main():
         if not _parsedFollowings:
             raise RuntimeError('Failed to parse followings')
 
+        _account = parse(join(sink, 'data/account.js'))
+        if not _account:
+            raise RuntimeError('Failed to parse account')
+
         _followers = getFollowers(_parsedFollowers)
         _followings = getFollowings(_parsedFollowings)
+        _accountDisplayName = getAccountDisplayName(_account)
         makeDirectory('plots')
 
         _success = [
             plotFollowersAndFollowings(_followers,
                                        _followings,
-                                       'Twitter Followers And Followings Per Cent',
-                                       'plots/twitterFollowersAndFollowingsPerCent.png')
+                                       'Twitter Followers And Followings Per Cent for {}'
+                                       .format(_accountDisplayName),
+                                       'plots/twitterFollowersAndFollowingsPerCentFor{}.png'
+                                       .format(_accountDisplayName))
         ]
 
         print('[+]Obtained success : {:.2f} %, in {} s'.format(
