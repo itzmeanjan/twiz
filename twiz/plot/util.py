@@ -19,8 +19,8 @@ def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink
         sns.set_style('darkgrid')
 
         sns.barplot(x=['Followers', 'Followings'], y=_data, ax=fig.gca())
-        fig.gca().set_ylabel('Percentage of Twitter Followers & Followings')
-        fig.gca().set_title(title, fontsize=22)
+        fig.gca().set_ylim(0, 100)
+        fig.gca().set_title(title, fontsize=22, pad=10)
 
         fig.savefig(sink, pad_inches=.5)
         plt.close(fig)
