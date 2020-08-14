@@ -8,6 +8,7 @@ from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
 from .plot.util import plotFollowersAndFollowings
+from time import time
 
 
 def _getCMD() -> Tuple[str, str]:
@@ -27,7 +28,13 @@ def _calculateSuccess(_data: List[bool]) -> float:
     return (len(list(filter(lambda e: e, _data))) / len(_data)) * 100
 
 
+def _banner():
+    print('\x1b[1;6;36;49m[+]twiz v0.1.0 - Your Twitter Account Data Analysis & Visualization Tool <3\x1b[0m\n\n\t\x1b[3;39;40m$ twiz `path-to-zip-file` `path-to-sink-directory`\x1b[0m\n\n[+]Author: Anjan Roy <anjanroy@yandex.com>\n[+]Source: https://github.com/itzmeanjan/twiz ( CC0-1.0 Licensed )\n')
+
+
 def main():
+    _banner()
+
     try:
         src, sink = _getCMD()
         if not exists(src):
@@ -37,6 +44,7 @@ def main():
             raise RuntimeError('Failed to extract from source')
 
         print('[+]Working ...')
+        _start = time()
 
         _parsedFollowers = parse(join(sink, 'data/follower.js'))
         if not _parsedFollowers:
@@ -57,7 +65,9 @@ def main():
                                        'plots/twitterFollowersAndFollowingsPerCent.png')
         ]
 
-        print('[+]Success: {:.2f} %'.format(_calculateSuccess(_success)))
+        print('[+]Obtained success : {:.2f} %, in {} s'.format(
+            _calculateSuccess(_success),
+            time() - _start))
     except KeyboardInterrupt:
         print('\n[!]Terminated')
     except Exception as e:
