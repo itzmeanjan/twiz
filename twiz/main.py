@@ -8,7 +8,10 @@ from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
 from .model.account import getAccountDisplayName
-from .plot.util import plotFollowersAndFollowings
+from .plot.util import (
+    plotFollowersAndFollowings,
+    plotFollowersAndFollowedFollowers
+)
 from time import time
 
 
@@ -74,7 +77,13 @@ def main():
                                        'Twitter Followers And Followings Per Cent for {}'
                                        .format(_accountDisplayName),
                                        'plots/twitterFollowersAndFollowingsPerCentFor{}.png'
-                                       .format(_joinName(_accountDisplayName)))
+                                       .format(_joinName(_accountDisplayName))),
+            plotFollowersAndFollowedFollowers(_followers,
+                                              _followings,
+                                              ['Twitter Followers & Followed back Followers for {}'.format(_accountDisplayName),
+                                               'Twitter Followings & Follower Followings for {}'.format(_accountDisplayName)],
+                                              'plots/twitterFollowersFollowingsAndIntersectionFor{}.png'
+                                              .format(_joinName(_accountDisplayName)))
         ]
 
         print('[+]Obtained success : {:.2f} %, in {} s'.format(

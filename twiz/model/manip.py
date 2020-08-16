@@ -6,7 +6,7 @@ from typing import Set, List
 def getFollowedFollowers(followers: map, followings: map) -> Set[str]:
     '''
         Computes list of those followings who follow you back or in other terms
-        followers whom you follow too
+        followers whom you follow back
     '''
     return set(map(lambda e: e[0], followers)).intersection(
         set(map(lambda e: e[0], followings)))
