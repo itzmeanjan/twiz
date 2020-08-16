@@ -80,9 +80,9 @@ def main():
                                        .format(_joinName(_accountDisplayName))),
             plotFollowersAndFollowedFollowers(_followers,
                                               _followings,
-                                              'Twitter Followers & Followed back Followers for {}'
-                                              .format(_accountDisplayName),
-                                              'plots/twitterFollowersAndFollowedBackFollowersFor{}.png'
+                                              ['Twitter Followers & Followed back Followers for {}'.format(_accountDisplayName),
+                                               'Twitter Followings & Follower Followings for {}'.format(_accountDisplayName)],
+                                              'plots/twitterFollowersFollowingsAndIntersectionFor{}.png'
                                               .format(_joinName(_accountDisplayName)))
         ]
 
