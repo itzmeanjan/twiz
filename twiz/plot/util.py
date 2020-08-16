@@ -35,7 +35,7 @@ def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink
 
 def plotFollowersAndFollowedFollowers(followers: map, followings: map, title: str, sink: str) -> bool:
     '''
-        Plotting followers & followed followers ( i.e. 
+        Plotting followers & followed followers ( i.e.
         followers whom you follow back ) data as bar chart
     '''
     try:
@@ -50,14 +50,34 @@ def plotFollowersAndFollowedFollowers(followers: map, followings: map, title: st
                                  dpi=100)
         sns.set_style('darkgrid')
 
-        sns.barplot(x=['Followers : {}'.format(_followerCount),
-                       'Followers whom YOU followed back : {}'.format(_commonCount)],
+        sns.barplot(x=['Followers',
+                       'Followers whom YOU followed back'],
                     y=[100, (_commonCount * 100) / _followerCount],
                     ax=axes[0])
-        sns.barplot(x=['Followings : {}'.format(_followingCount),
-                       'Followings who\'re following YOU : {}'.format(_commonCount)],
+
+        for i, j in enumerate(axes[0].patches):
+            axes[0].text(j.get_x() + j.get_width() * .5,
+                         j.get_y() + j.get_height() * .5,
+                         [_followerCount, _commonCount][i],
+                         ha='center',
+                         rotation=0,
+                         fontsize=14,
+                         color='black')
+
+        sns.barplot(x=['Followings',
+                       'Followings who\'re following YOU'],
                     y=[100, (_commonCount * 100) / _followingCount],
                     ax=axes[1])
+
+        for i, j in enumerate(axes[1].patches):
+            axes[1].text(j.get_x() + j.get_width() * .5,
+                         j.get_y() + j.get_height() * .5,
+                         [_followingCount, _commonCount][i],
+                         ha='center',
+                         rotation=0,
+                         fontsize=14,
+                         color='black')
+
         axes[0].set_ylim(0, 100)
         axes[1].set_ylim(0, 100)
         axes[0].set_title(title[0], pad=4)
