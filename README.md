@@ -17,5 +17,6 @@ During this early days of development, I'm not planning to publish it on PyPI. B
 
 - Follwers & Followings
     - [x] [Twitter Followers And Followings Per Cent](./docs/twitterFollowersAndFollowingsPerCent.md)
+    - [x] [Twitter Followers & Followers whom you're following vs Twitter Followings & Followings who're following you](./docs/twitterFollowersFollowingsAndIntersectionForYOU.md)
 
 **This section will keep getting populated ;)**
