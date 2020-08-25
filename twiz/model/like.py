@@ -28,7 +28,7 @@ def _getHashTagRegex() -> Pattern:
     return regCompile(r'(\#\S+)')
 
 
-def countOfHashTags(data: map) -> List[Tuple[str, int]]:
+def countOfHashTags(data: map) -> Counter:
     '''
         Returns count of each hashtags found in liked tweets
     '''
@@ -36,6 +36,10 @@ def countOfHashTags(data: map) -> List[Tuple[str, int]]:
 
     return Counter(chain.from_iterable(map(lambda e: _regex.findall(e[1]),
                                            deepcopy(data))))
+
+
+def topXHashTagsInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
+    return countOfHashTags(data).most_common(x)
 
 
 if __name__ == '__main__':
