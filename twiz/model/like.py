@@ -2,6 +2,9 @@
 
 from typing import List, Tuple, Dict, Any
 from re import compile as regCompile, I as regI, Pattern
+from copy import deepcopy
+from itertools import chain
+from collections import Counter
 
 
 def getLikes(data: List[Dict[str, Any]]) -> map:
@@ -20,9 +23,19 @@ def getLikes(data: List[Dict[str, Any]]) -> map:
 
 def _getHashTagRegex() -> Pattern:
     '''
-        HashTag finded regular expression
+        HashTag finder regular expression
     '''
     return regCompile(r'(\#\S+)')
+
+
+def countOfHashTags(data: map) -> List[Tuple[str, int]]:
+    '''
+        Returns count of each hashtags found in liked tweets
+    '''
+    _regex = _getHashTagRegex()
+
+    return Counter(chain.from_iterable(map(lambda e: _regex.findall(e[1]),
+                                           deepcopy(data))))
 
 
 if __name__ == '__main__':
