@@ -38,6 +38,9 @@ def countOfHashTags(data: map) -> Counter:
 
 
 def topXHashTagsInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
+    '''
+        Returns list of top X most used hash tags found in liked tweets
+    '''
     return countOfHashTags(data).most_common(x)
 
 
