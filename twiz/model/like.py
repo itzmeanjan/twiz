@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from typing import List, Tuple, Dict, Any
+from re import compile as regCompile, I as regI, Pattern
 
 
 def getLikes(data: List[Dict[str, Any]]) -> map:
@@ -15,6 +16,13 @@ def getLikes(data: List[Dict[str, Any]]) -> map:
         return _like['tweetId'], _like['fullText'], _like['expandedUrl']
 
     return map(_helper, data)
+
+
+def _getHashTagRegex() -> Pattern:
+    '''
+        HashTag finded regular expression
+    '''
+    return regCompile(r'(\#\S+)')
 
 
 if __name__ == '__main__':
