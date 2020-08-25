@@ -11,7 +11,17 @@ I'm adding some features here, if you feel some improvements can be done there, 
 
 ## usage
 
-During this early days of development, I'm not planning to publish it on PyPI. But later it'll be made available there. Now you can test it on your machine by cloning this repository.
+**twiz** can be downloaded from PyPI. Make sure you've python _( >=3.7 )_ installed.
+
+```bash
+python3 -m pip install twiz
+```
+
+If you've added default _pip_ installation path to system **PATH** variable, then it can be invoked as below.
+
+```
+twiz path-to-twitter-data.zip sink/
+```
 
 ## features
 

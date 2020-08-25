@@ -17,11 +17,26 @@ def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink
     try:
         _data = getFollowersAndFollowingsPerCent(deepcopy(followers),
                                                  deepcopy(followings))
+        _followerCount = len(list(map(lambda e: e[0],
+                                      deepcopy(followers))))
+        _followingCount = len(list(map(lambda e: e[0],
+                                       deepcopy(followings))))
+
         fig = plt.Figure(figsize=(16, 9), dpi=100)
 
         sns.set_style('darkgrid')
 
         sns.barplot(x=['Followers', 'Followings'], y=_data, ax=fig.gca())
+
+        for i, j in enumerate(fig.gca().patches):
+            fig.gca().text(j.get_x() + j.get_width() * .5,
+                           j.get_y() + j.get_height() * .5,
+                           [_followerCount, _followingCount][i],
+                           ha='center',
+                           rotation=0,
+                           fontsize=14,
+                           color='black')
+
         fig.gca().set_ylim(0, 100)
         fig.gca().set_title(title, fontsize=22, pad=10)
 
