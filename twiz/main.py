@@ -104,7 +104,7 @@ def main():
             )
         ]
 
-        print('[+]Obtained success : {:.2f} %, in {} s'.format(
+        print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
             _calculateSuccess(_success),
             time() - _start))
     except KeyboardInterrupt:
