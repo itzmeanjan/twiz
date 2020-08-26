@@ -8,9 +8,14 @@ from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
 from .model.account import getAccountDisplayName
+from .model.like import (
+    topXHashTagsInLikedTweets,
+    getLikes
+)
 from .plot.util import (
     plotFollowersAndFollowings,
-    plotFollowersAndFollowedFollowers
+    plotFollowersAndFollowedFollowers,
+    plotTopXHashTagsFoundInLikedTweets
 )
 from time import time
 
@@ -66,9 +71,14 @@ def main():
         if not _account:
             raise RuntimeError('Failed to parse account')
 
+        _parsedLikes = parse(join(sink, 'data/like.js'))
+        if not _parsedLikes:
+            raise RuntimeError('Failed to parse likes')
+
         _followers = getFollowers(_parsedFollowers)
         _followings = getFollowings(_parsedFollowings)
         _accountDisplayName = getAccountDisplayName(_account)
+        _likes = getLikes(_parsedLikes)
         makeDirectory('plots')
 
         _success = [
@@ -83,10 +93,18 @@ def main():
                                               ['Twitter Followers & Followed back Followers for {}'.format(_accountDisplayName),
                                                'Twitter Followings & Follower Followings for {}'.format(_accountDisplayName)],
                                               'plots/twitterFollowersFollowingsAndIntersectionFor{}.png'
-                                              .format(_joinName(_accountDisplayName)))
+                                              .format(_joinName(_accountDisplayName))),
+            plotTopXHashTagsFoundInLikedTweets(
+                _likes,
+                10,
+                'Top 10 Twitter #HASHTAGS found in tweets liked by {}'
+                .format(_accountDisplayName),
+                'plots/top10TwitterHashTagsFoundInTweetsLikedBy{}.png'
+                .format(_joinName(_accountDisplayName))
+            )
         ]
 
-        print('[+]Obtained success : {:.2f} %, in {} s'.format(
+        print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
             _calculateSuccess(_success),
             time() - _start))
     except KeyboardInterrupt:

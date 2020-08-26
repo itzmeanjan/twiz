@@ -8,6 +8,7 @@ from ..model.manip import (
     getFollowersAndFollowingsPerCent,
     getFollowedFollowers
 )
+from ..model.like import topXHashTagsInLikedTweets
 
 
 def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink: str) -> bool:
@@ -97,6 +98,39 @@ def plotFollowersAndFollowedFollowers(followers: map, followings: map, title: st
         axes[1].set_ylim(0, 100)
         axes[0].set_title(title[0], pad=4)
         axes[1].set_title(title[1], pad=4)
+
+        fig.savefig(sink, pad_inches=.5)
+        plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
+def plotTopXHashTagsFoundInLikedTweets(likes: map, x: int, title: str, sink: str) -> bool:
+    try:
+        _data = topXHashTagsInLikedTweets(deepcopy(likes), x)
+        _x, _y = [], []
+        for i in _data:
+            _x.append(i[0])
+            _y.append(i[1])
+
+        fig = plt.Figure(figsize=(16, 9), dpi=100)
+
+        sns.set_style('darkgrid')
+
+        sns.barplot(x=_x, y=_y, ax=fig.gca())
+
+        for i, j in enumerate(fig.gca().patches):
+            fig.gca().text(j.get_x() + j.get_width() * .5,
+                           j.get_y() + j.get_height() * .5,
+                           _y[i],
+                           ha='center',
+                           rotation=0,
+                           fontsize=15,
+                           color='black')
+
+        fig.gca().set_title(title, fontsize=22, pad=10)
 
         fig.savefig(sink, pad_inches=.5)
         plt.close(fig)
