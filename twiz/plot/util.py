@@ -151,8 +151,7 @@ def plotTopXHashTagsFoundInLikedTweets(likes: map, x: int, title: str, sink: str
 
 def plotTopXTaggedUsersFoundInLikedTweets(likes: map, x: int, title: str, sink: str) -> bool:
     '''
-        Plotting top X most found emojis ( in demojized form i.e. text 
-        based representation ) in tweets liked by YOU as bar plot
+        Plotting top X most found tagged user names in tweets liked by YOU as bar plot
     '''
     try:
         _data = topXTaggedUsersInLikedTweets(deepcopy(likes), x)
@@ -186,6 +185,10 @@ def plotTopXTaggedUsersFoundInLikedTweets(likes: map, x: int, title: str, sink: 
 
 
 def plotTopXEmojisFoundInLikedTweets(likes: map, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting top X most found emojis ( in demojized form i.e. text 
+        based representation ) in tweets liked by YOU as bar plot
+    '''
     try:
         _data = topXEmojisInLikedTweets(deepcopy(likes), x)
         _x, _y = [], []
