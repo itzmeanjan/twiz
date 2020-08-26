@@ -31,5 +31,6 @@ twiz path-to-twitter-data.zip sink/
 
 - Likes
     - [x] [Top 10 Twitter **#HASHTAGS** found in tweets liked by YOU](./docs/top10TwitterHashTagsFoundInTweetsLikedByYOU.md)
+    - [x] [Top 10 **@TaggedTwitterUsers** found in tweets liked by YOU](./docs/top10TaggedTwitterUsersFoundInTweetsLikedByYOU.md)
 
 **This section will keep getting populated ;)**
