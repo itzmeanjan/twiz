@@ -114,6 +114,9 @@ def plotFollowersAndFollowedFollowers(followers: map, followings: map, title: st
 
 
 def plotTopXHashTagsFoundInLikedTweets(likes: map, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting top X most found hash tags in tweets liked by YOU as bar plot
+    '''
     try:
         _data = topXHashTagsInLikedTweets(deepcopy(likes), x)
         _x, _y = [], []
@@ -147,6 +150,10 @@ def plotTopXHashTagsFoundInLikedTweets(likes: map, x: int, title: str, sink: str
 
 
 def plotTopXTaggedUsersFoundInLikedTweets(likes: map, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting top X most found emojis ( in demojized form i.e. text 
+        based representation ) in tweets liked by YOU as bar plot
+    '''
     try:
         _data = topXTaggedUsersInLikedTweets(deepcopy(likes), x)
         _x, _y = [], []
