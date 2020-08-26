@@ -87,7 +87,7 @@ def topXEmojisInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
     '''
         Extracts top X most found emojis in liked tweets by you
     '''
-    return countOfHashTags(data).most_common(x)
+    return countOfEmojis(data).most_common(x)
 
 
 if __name__ == '__main__':
