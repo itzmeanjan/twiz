@@ -83,5 +83,12 @@ def countOfEmojis(data: map) -> Counter:
     return Counter(chain.from_iterable(map(lambda e: _extractEmojis(e[1]), data)))
 
 
+def topXEmojisInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
+    '''
+        Extracts top X most found emojis in liked tweets by you
+    '''
+    return countOfHashTags(data).most_common(x)
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
