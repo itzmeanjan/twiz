@@ -10,8 +10,11 @@ from ..model.manip import (
 )
 from ..model.like import (
     topXHashTagsInLikedTweets,
-    topXTaggedUsersInLikedTweets
+    topXTaggedUsersInLikedTweets,
+    topXEmojisInLikedTweets
 )
+from emoji import demojize
+from textwrap import wrap
 
 
 def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink: str) -> bool:
@@ -112,6 +115,9 @@ def plotFollowersAndFollowedFollowers(followers: map, followings: map, title: st
 
 
 def plotTopXHashTagsFoundInLikedTweets(likes: map, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting top X most found hash tags in tweets liked by YOU as bar plot
+    '''
     try:
         _data = topXHashTagsInLikedTweets(deepcopy(likes), x)
         _x, _y = [], []
@@ -145,6 +151,9 @@ def plotTopXHashTagsFoundInLikedTweets(likes: map, x: int, title: str, sink: str
 
 
 def plotTopXTaggedUsersFoundInLikedTweets(likes: map, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting top X most found tagged user names in tweets liked by YOU as bar plot
+    '''
     try:
         _data = topXTaggedUsersInLikedTweets(deepcopy(likes), x)
         _x, _y = [], []
@@ -167,6 +176,46 @@ def plotTopXTaggedUsersFoundInLikedTweets(likes: map, x: int, title: str, sink: 
                            color='black')
 
         fig.gca().set_title(title, fontsize=22, pad=10)
+
+        fig.savefig(sink, pad_inches=.5)
+        plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
+def plotTopXEmojisFoundInLikedTweets(likes: map, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting top X most found emojis ( in demojized form i.e. text 
+        based representation ) in tweets liked by YOU as bar plot
+    '''
+    try:
+        _data = topXEmojisInLikedTweets(deepcopy(likes), x)
+        _x, _y = [], []
+        for i in _data:
+            _x.append(i[1])
+            _y.append(i[0])
+
+        fig = plt.Figure(figsize=(16, 9), dpi=100)
+        sns.set_style('darkgrid')
+
+        sns.barplot(x=_x,
+                    y=['\n'.join(wrap(' '.join([j.capitalize() for j in demojize(
+                        i).strip(':').split('_')]), width=16)) for i in _y],
+                    ax=fig.gca(), orient='h')
+
+        for i, j in enumerate(fig.gca().patches):
+            fig.gca().text(j.get_x() + j.get_width() * .5,
+                           j.get_y() + j.get_height() * .5,
+                           _x[i],
+                           ha='center',
+                           rotation=0,
+                           fontsize=16,
+                           color='black')
+
+        fig.gca().set_title(title, fontsize=22, pad=10)
+        fig.tight_layout(pad=4)
 
         fig.savefig(sink, pad_inches=.5)
         plt.close(fig)

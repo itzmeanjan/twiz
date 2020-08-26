@@ -4,6 +4,7 @@ from typing import List, Tuple, Dict, Any
 from re import compile as regCompile, I as regI, Pattern
 from itertools import chain
 from collections import Counter
+from emoji import emoji_lis
 
 
 def getLikes(data: List[Dict[str, Any]]) -> map:
@@ -66,6 +67,27 @@ def topXTaggedUsersInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
         Returns list of top X mostly tagged usernames found in liked tweets
     '''
     return countOfTaggedUsers(data).most_common(x)
+
+
+def countOfEmojis(data: map) -> Counter:
+    '''
+        Extracts out all emojis from liked tweets & finds their respective count
+    '''
+    def _extractEmojis(text: str) -> List[str]:
+        _emojis = emoji_lis(text)
+        if not _emojis:
+            return []
+
+        return [i['emoji'] for i in _emojis]
+
+    return Counter(chain.from_iterable(map(lambda e: _extractEmojis(e[1]), data)))
+
+
+def topXEmojisInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
+    '''
+        Extracts top X most found emojis in liked tweets by you
+    '''
+    return countOfEmojis(data).most_common(x)
 
 
 if __name__ == '__main__':
