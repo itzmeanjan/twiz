@@ -86,9 +86,9 @@ def main():
         _success = [
             plotFollowersAndFollowings(_followers,
                                        _followings,
-                                       'Twitter Followers And Followings Per Cent for {}'
+                                       'Twitter Followers And Followings for {}'
                                        .format(_accountDisplayName),
-                                       'plots/twitterFollowersAndFollowingsPerCentFor{}.png'
+                                       'plots/twitterFollowersAndFollowingsFor{}.png'
                                        .format(_joinName(_accountDisplayName))),
             plotFollowersAndFollowedFollowers(_followers,
                                               _followings,

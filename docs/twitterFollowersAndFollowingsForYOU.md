@@ -15,4 +15,4 @@ Then we plot these two counts as bar chart.
 
 Here's a sample plot.
 
-![twitterFollowersAndFollowingsPerCent](../plots/twitterFollowersAndFollowingsPerCentForAnjan_Roy.png)
+![twitterFollowersAndFollowingsPerCent](../plots/twitterFollowersAndFollowingsForAnjan_Roy.png)

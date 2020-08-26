@@ -35,7 +35,8 @@ def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink
         for i, j in enumerate(fig.gca().patches):
             fig.gca().text(j.get_x() + j.get_width() * .5,
                            j.get_y() + j.get_height() * .5,
-                           [_followerCount, _followingCount][i],
+                           ['Count: {} [ {:.2f}% ]'.format(_followerCount, _data[0]),
+                            'Count: {} [ {:.2f}% ]'.format(_followingCount, _data[1])][i],
                            ha='center',
                            rotation=0,
                            fontsize=14,
