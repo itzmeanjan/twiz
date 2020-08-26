@@ -97,7 +97,7 @@ def main():
             plotTopXHashTagsFoundInLikedTweets(
                 _likes,
                 10,
-                'Top 10 Twitter #HashTags found in tweets liked by {}'
+                'Top 10 Twitter #HASHTAGS found in tweets liked by {}'
                 .format(_accountDisplayName),
                 'plots/top10TwitterHashTagsFoundInTweetsLikedBy{}.png'
                 .format(_joinName(_accountDisplayName))
