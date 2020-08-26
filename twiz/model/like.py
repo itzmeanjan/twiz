@@ -24,7 +24,7 @@ def _getHashTagRegex() -> Pattern:
     '''
         HashTag finder regular expression
     '''
-    return regCompile(r'(\#\S+)')
+    return regCompile(r'(\#\w+)')
 
 
 def countOfHashTags(data: map) -> Counter:
@@ -42,6 +42,13 @@ def topXHashTagsInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
         Returns list of top X most used hash tags found in liked tweets
     '''
     return countOfHashTags(data).most_common(x)
+
+
+def _getTaggedUserRegex() -> Pattern:
+    '''
+        Regular expression for finding tagged users
+    '''
+    return regCompile(r'(@\w+)')
 
 
 if __name__ == '__main__':
