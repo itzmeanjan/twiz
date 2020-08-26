@@ -14,6 +14,7 @@ from ..model.like import (
     topXEmojisInLikedTweets
 )
 from emoji import demojize
+from textwrap import wrap
 
 
 def plotFollowersAndFollowings(followers: map, followings: map, title: str, sink: str) -> bool:
@@ -200,8 +201,8 @@ def plotTopXEmojisFoundInLikedTweets(likes: map, x: int, title: str, sink: str) 
         sns.set_style('darkgrid')
 
         sns.barplot(x=_x,
-                    y=[' '.join([j.capitalize() for j in demojize(
-                        i).strip(':').split('_')]) for i in _y],
+                    y=['\n'.join(wrap(' '.join([j.capitalize() for j in demojize(
+                        i).strip(':').split('_')]), width=16)) for i in _y],
                     ax=fig.gca(), orient='h')
 
         for i, j in enumerate(fig.gca().patches):
