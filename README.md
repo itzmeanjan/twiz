@@ -3,18 +3,22 @@ Your Twitter Account Data Analysis &amp; Visualization Tool &lt;3
 
 ## motivation
 
-Being a data hunter ( yeah, you read it correct ), I love to collect available data & analyze it for finding hidden patterns in it.
+Being a data hunter ( yeah, you read it correct ), I love to collect data & analyze it for finding hidden patterns in it.
 
-That's why I downloaded my Twitter account data & started analyzing it. This tool can be used for analyzing your twitter account data without sending any of it to remote machines.
+That's why I downloaded my Twitter account data archive & started analyzing it. This tool can be used for analyzing your twitter account data without sending any of it to remote machines.
 
 I'm adding some features here, if you feel some improvements can be done there, please feel free to contact me or you can always raise a PR.
+
+## data
+
+For obtaining your copy of Twitter account data archive, follow [this](https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive).
 
 ## usage
 
 **twiz** can be downloaded from PyPI. Make sure you've python _( >=3.7 )_ installed.
 
 ```bash
-python3 -m pip install twiz
+python3 -m pip install -U twiz
 ```
 
 If you've added default _pip_ installation path to system **PATH** variable, then it can be invoked as below.
