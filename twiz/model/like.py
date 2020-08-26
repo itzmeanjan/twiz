@@ -51,5 +51,15 @@ def _getTaggedUserRegex() -> Pattern:
     return regCompile(r'(@\w+)')
 
 
+def countOfTaggedUsers(data: map) -> Counter:
+    '''
+        Returns how many times each tagged user name found in liked tweets
+    '''
+    _regex = _getTaggedUserRegex()
+
+    return Counter(chain.from_iterable(map(lambda e: _regex.findall(e[1]),
+                                           data)))
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
