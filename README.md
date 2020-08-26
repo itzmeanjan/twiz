@@ -29,4 +29,7 @@ twiz path-to-twitter-data.zip sink/
     - [x] [Twitter Followers And Followings Per Cent](./docs/twitterFollowersAndFollowingsPerCent.md)
     - [x] [Twitter Followers & Followers whom you're following vs Twitter Followings & Followings who're following you](./docs/twitterFollowersFollowingsAndIntersectionForYOU.md)
 
+- Likes
+    - [x] [Top 10 Twitter **#HASHTAGS** found in tweets liked by YOU](./docs/top10TwitterHashTagsFoundInTweetsLikedByYOU.md)
+
 **This section will keep getting populated ;)**
