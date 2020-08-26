@@ -9,13 +9,15 @@ from .model.follower import getFollowers
 from .model.following import getFollowings
 from .model.account import getAccountDisplayName
 from .model.like import (
+    getLikes,
     topXHashTagsInLikedTweets,
-    getLikes
+    topXTaggedUsersInLikedTweets
 )
 from .plot.util import (
     plotFollowersAndFollowings,
     plotFollowersAndFollowedFollowers,
-    plotTopXHashTagsFoundInLikedTweets
+    plotTopXHashTagsFoundInLikedTweets,
+    plotTopXTaggedUsersFoundInLikedTweets
 )
 from time import time
 
@@ -95,12 +97,18 @@ def main():
                                               'plots/twitterFollowersFollowingsAndIntersectionFor{}.png'
                                               .format(_joinName(_accountDisplayName))),
             plotTopXHashTagsFoundInLikedTweets(
-                _likes,
-                10,
-                'Top 10 Twitter #HASHTAGS found in tweets liked by {}'
-                .format(_accountDisplayName),
-                'plots/top10TwitterHashTagsFoundInTweetsLikedBy{}.png'
-                .format(_joinName(_accountDisplayName))
+                _likes, 10,
+                'Top 10 Twitter #HASHTAGS found in tweets liked by {}'.format(
+                    _accountDisplayName),
+                'plots/top10TwitterHashTagsFoundInTweetsLikedBy{}.png'.format(
+                    _joinName(_accountDisplayName))
+            ),
+            plotTopXTaggedUsersFoundInLikedTweets(
+                _likes, 10,
+                'Top 10 @TaggedTwitterUsers found in tweets liked by {}'.format(
+                    _accountDisplayName),
+                'plots/top10TaggedTwitterUsersFoundInTweetsLikedBy{}.png'.format(
+                    _joinName(_accountDisplayName))
             )
         ]
 
