@@ -8,16 +8,13 @@ from .parser import parse
 from .model.follower import getFollowers
 from .model.following import getFollowings
 from .model.account import getAccountDisplayName
-from .model.like import (
-    getLikes,
-    topXHashTagsInLikedTweets,
-    topXTaggedUsersInLikedTweets
-)
+from .model.like import getLikes
 from .plot.util import (
     plotFollowersAndFollowings,
     plotFollowersAndFollowedFollowers,
     plotTopXHashTagsFoundInLikedTweets,
-    plotTopXTaggedUsersFoundInLikedTweets
+    plotTopXTaggedUsersFoundInLikedTweets,
+    plotTopXEmojisFoundInLikedTweets
 )
 from time import time
 
@@ -108,6 +105,13 @@ def main():
                 'Top 10 @TaggedTwitterUsers found in tweets liked by {}'.format(
                     _accountDisplayName),
                 'plots/top10TaggedTwitterUsersFoundInTweetsLikedBy{}.png'.format(
+                    _joinName(_accountDisplayName))
+            ),
+            plotTopXEmojisFoundInLikedTweets(
+                _likes, 10,
+                'Top 10 Emojis found in tweets liked by {}'.format(
+                    _accountDisplayName),
+                'plots/top10EmojisFoundInTweetsLikedBy{}.png'.format(
                     _joinName(_accountDisplayName))
             )
         ]
