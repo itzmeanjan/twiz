@@ -61,5 +61,12 @@ def countOfTaggedUsers(data: map) -> Counter:
                                            data)))
 
 
+def topXTaggedUsersInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
+    '''
+        Returns list of top X mostly tagged usernames found in liked tweets
+    '''
+    return countOfTaggedUsers(data).most_common(x)
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
