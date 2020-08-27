@@ -111,7 +111,7 @@ def classifyEmojisByHashTagsInTweets(data: map) -> Dict[str, List[str]]:
     '''
     _buffer = {}
 
-    for i in data:
+    for i in getHashTagsAndEmojis(data):
         for j in i[0]:
 
             if j not in _buffer:
