@@ -91,13 +91,35 @@ def topXEmojisInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
     return countOfEmojis(data).most_common(x)
 
 
-def getHashTagsAndEmojis(data: map):
+def getHashTagsAndEmojis(data: map) -> map:
     '''
         Extracts out hash tags and emojis present in each of tweets liked by YOU
     '''
     _regex = _getHashTagRegex()
 
     return map(lambda e: (_regex.findall(e[1]), _extractEmojis(e[1])), data)
+
+
+def classifyEmojisByHashTagsInTweets(data: map) -> Dict[str, List[str]]:
+    '''
+        Given a map of tuples of this form `(['#100DaysOfCode'], ['👉', '♥', '😁'])`,
+        we'll iterate over each hashtag & then append emojis to its own class i.e.
+        classifying emojis by hashtags. 
+
+        This association will help us in finding which emojis are used with which hashtags mostly,
+        in liked tweets.
+    '''
+    _buffer = {}
+
+    for i in data:
+        for j in i[0]:
+
+            if j not in _buffer:
+                _buffer[j] = [*i[1]]
+            else:
+                _buffer[j].extend(i[1])
+
+    return _buffer
 
 
 if __name__ == '__main__':
