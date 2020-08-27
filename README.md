@@ -29,7 +29,7 @@ twiz path-to-twitter-data.zip sink/
 
 ## features
 
-- Follwers & Followings
+- Followers & Followings
     - [x] [Twitter Followers And Followings Per Cent](./docs/twitterFollowersAndFollowingsForYOU.md)
     - [x] [Twitter Followers & Followers whom you're following vs Twitter Followings & Followings who're following you](./docs/twitterFollowersFollowingsAndIntersectionForYOU.md)
 
