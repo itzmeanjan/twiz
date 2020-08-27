@@ -69,18 +69,19 @@ def topXTaggedUsersInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
     return countOfTaggedUsers(data).most_common(x)
 
 
+def _extractEmojis(text: str) -> List[str]:
+    '''
+        Given a text, extracts out all emojis present in that text
+    '''
+    return [i['emoji'] for i in emoji_lis(text)]
+
+
 def countOfEmojis(data: map) -> Counter:
     '''
         Extracts out all emojis from liked tweets & finds their respective count
     '''
-    def _extractEmojis(text: str) -> List[str]:
-        _emojis = emoji_lis(text)
-        if not _emojis:
-            return []
-
-        return [i['emoji'] for i in _emojis]
-
-    return Counter(chain.from_iterable(map(lambda e: _extractEmojis(e[1]), data)))
+    return Counter(chain.from_iterable(
+        map(lambda e: _extractEmojis(e[1]), data)))
 
 
 def topXEmojisInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
@@ -88,6 +89,15 @@ def topXEmojisInLikedTweets(data: map, x: int) -> List[Tuple[str, int]]:
         Extracts top X most found emojis in liked tweets by you
     '''
     return countOfEmojis(data).most_common(x)
+
+
+def getHashTagsAndEmojis(data: map):
+    '''
+        Extracts out hash tags and emojis present in each of tweets liked by YOU
+    '''
+    _regex = _getHashTagRegex()
+
+    return map(lambda e: (_regex.findall(e[1]), _extractEmojis(e[1])), data)
 
 
 if __name__ == '__main__':
