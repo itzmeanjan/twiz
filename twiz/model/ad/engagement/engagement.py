@@ -27,21 +27,21 @@ class Engagement:
         impressionAttr = data['impressionAttributes']
 
         return Engagement(
-            DeviceInfo(impressionAttr['deviceInfo']['osType'],
-                       impressionAttr['deviceInfo']['deviceId']),
-            impressionAttr['displayLocation'],
+            DeviceInfo(impressionAttr['deviceInfo'].get('osType'),
+                       impressionAttr['deviceInfo'].get('deviceId')),
+            impressionAttr.get('displayLocation'),
             Tweet(
-                impressionAttr['promotedTweetInfo']['tweetId'],
-                impressionAttr['promotedTweetInfo']['tweetText'],
-                impressionAttr['promotedTweetInfo']['urls'],
-                impressionAttr['promotedTweetInfo']['mediaUrls']
+                impressionAttr.get('promotedTweetInfo', {}).get('tweetId'),
+                impressionAttr.get('promotedTweetInfo', {}).get('tweetText'),
+                impressionAttr.get('promotedTweetInfo', {}).get('urls'),
+                impressionAttr.get('promotedTweetInfo', {}).get('mediaUrls')
             ),
             Info(
                 impressionAttr['advertiserInfo']['advertiserName'],
                 impressionAttr['advertiserInfo']['screenName']
             ),
-            [MatchedCriteria(i['targetingType'], i['targetingValue'])
-             for i in impressionAttr['matchedTargetingCriteria']],
+            [MatchedCriteria(i.get('targetingType'), i.get('targetingValue'))
+             for i in impressionAttr.get('matchedTargetingCriteria', [])],
             impressionAttr['impressionTime'],
             [EngagementAttributes(i['engagementTime'], i['engagementType'])
              for i in data['engagementAttributes']])

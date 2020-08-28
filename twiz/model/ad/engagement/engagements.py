@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .engagement import Engagement
 from typing import List, Dict, Any
+from itertools import chain
 
 
 class Engagements:
@@ -10,11 +11,11 @@ class Engagements:
         self.all = all
 
     @staticmethod
-    def build(self, data: Dict[str, Any]) -> Engagements:
-        return Engagements(
-            [
-                Engagement.build(j) for j in i['ad']['adsUserData']['adEngagements']['engagements']
-                for i in data])
+    def build(data: Dict[str, Any]) -> Engagements:
+        return Engagements(list(
+            chain.from_iterable(
+                [[Engagement.build(j) for j in i['ad']['adsUserData']
+                  ['adEngagements']['engagements']] for i in data])))
 
 
 if __name__ == '__main__':
