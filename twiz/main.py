@@ -9,6 +9,7 @@ from .model.follower import getFollowers
 from .model.following import getFollowings
 from .model.account import getAccountDisplayName
 from .model.like import getLikes
+from .model.ad.engagement.engagements import Engagements
 from .plot.util import (
     plotFollowersAndFollowings,
     plotFollowersAndFollowedFollowers,
@@ -16,6 +17,7 @@ from .plot.util import (
     plotTopXTaggedUsersFoundInLikedTweets,
     plotTopXEmojisFoundInLikedTweets
 )
+from .plot.ad.engagement.viz import plotAdTargetDeviceTypes
 from time import time
 
 
@@ -74,10 +76,15 @@ def main():
         if not _parsedLikes:
             raise RuntimeError('Failed to parse likes')
 
+        _parsedAdEngagement = parse(join(sink, 'data/ad-engagements.js'))
+        if not _parsedFollowers:
+            raise RuntimeError('Failed to parse advertisement engagements')
+
         _followers = getFollowers(_parsedFollowers)
         _followings = getFollowings(_parsedFollowings)
         _accountDisplayName = getAccountDisplayName(_account)
         _likes = getLikes(_parsedLikes)
+        _engagements = Engagements.build(_parsedAdEngagement)
         makeDirectory('plots')
 
         _success = [
@@ -98,22 +105,25 @@ def main():
                 'Top 10 Twitter #HASHTAGS found in tweets liked by {}'.format(
                     _accountDisplayName),
                 'plots/top10TwitterHashTagsFoundInTweetsLikedBy{}.png'.format(
-                    _joinName(_accountDisplayName))
-            ),
+                    _joinName(_accountDisplayName))),
             plotTopXTaggedUsersFoundInLikedTweets(
                 _likes, 10,
                 'Top 10 @TaggedTwitterUsers found in tweets liked by {}'.format(
                     _accountDisplayName),
                 'plots/top10TaggedTwitterUsersFoundInTweetsLikedBy{}.png'.format(
-                    _joinName(_accountDisplayName))
-            ),
+                    _joinName(_accountDisplayName))),
             plotTopXEmojisFoundInLikedTweets(
                 _likes, 10,
                 'Top 10 Emojis found in tweets liked by {}'.format(
                     _accountDisplayName),
                 'plots/top10EmojisFoundInTweetsLikedBy{}.png'.format(
-                    _joinName(_accountDisplayName))
-            )
+                    _joinName(_accountDisplayName))),
+            plotAdTargetDeviceTypes(
+                _engagements,
+                'Twitter advertisements targetting {} by device'.format(
+                    _accountDisplayName),
+                'plots/twitterAdsTargetting{}ByDevice.png'.format(
+                    _joinName(_accountDisplayName)))
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(

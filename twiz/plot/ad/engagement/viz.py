@@ -3,10 +3,15 @@
 import seaborn as sns
 from matplotlib import pyplot as plt
 from typing import List
+from twiz.model.ad.engagement.engagements import Engagements
 
 
-def plotAdTargetDeviceTypes(x: List[str], y: List[str], title: str, sink: str) -> bool:
+def plotAdTargetDeviceTypes(data: Engagements, title: str, sink: str) -> bool:
     try:
+        _tmp = data.countByDeviceType()
+        x = list(_tmp.keys())
+        y = [_tmp[i] for i in x]
+
         fig = plt.Figure(figsize=(16, 9), dpi=100)
         sns.set_style('darkgrid')
 
