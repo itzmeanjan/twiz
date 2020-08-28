@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .engagement import Engagement
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
 from itertools import chain
+from collections import Counter
 
 
 class Engagements:
@@ -16,6 +17,11 @@ class Engagements:
             chain.from_iterable(
                 [[Engagement.build(j) for j in i['ad']['adsUserData']
                   ['adEngagements']['engagements']] for i in data])))
+
+    def countByDeviceType(self) -> Counter:
+        return Counter(filter(lambda e: e,
+                              map(lambda e: e.device.type,
+                                  self.all)))
 
 
 if __name__ == '__main__':
