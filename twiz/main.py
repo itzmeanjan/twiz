@@ -120,9 +120,9 @@ def main():
                     _joinName(_accountDisplayName))),
             plotAdTargetDeviceTypes(
                 _engagements,
-                'Twitter advertisements targetting {} by device'.format(
+                'Twitter advertisements targeting {} on devices'.format(
                     _accountDisplayName),
-                'plots/twitterAdsTargetting{}ByDevice.png'.format(
+                'plots/twitterAdsTargeting{}OnDevices.png'.format(
                     _joinName(_accountDisplayName)))
         ]
 
