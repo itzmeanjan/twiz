@@ -17,6 +17,12 @@ class Tweet:
     def extractTags(self) -> List[str]:
         return self._tagRegex().findall(self.text)
 
+    def _hashTagRegex(self) -> Pattern:
+        return regCompile(r'(\#\w+)')
+
+    def extractHashTags(self) -> List[str]:
+        return self._hashTagRegex().findall(self.text)
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
