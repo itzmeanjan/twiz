@@ -25,7 +25,6 @@ class Engagement:
     @staticmethod
     def build(data: Dict[str, Any]) -> Engagement:
         impressionAttr = data['impressionAttributes']
-        engagementAttr = data['engagementAttributes']
 
         return Engagement(
             DeviceInfo(impressionAttr['deviceInfo']['osType'],
@@ -45,8 +44,7 @@ class Engagement:
              for i in impressionAttr['matchedTargetingCriteria']],
             impressionAttr['impressionTime'],
             [EngagementAttributes(i['engagementTime'], i['engagementType'])
-             for i in engagementAttr]
-        )
+             for i in data['engagementAttributes']])
 
 
 if __name__ == '__main__':
