@@ -23,6 +23,13 @@ class Engagements:
                               map(lambda e: e.device.type,
                                   self.all)))
 
+    def countByDisplayLocation(self) -> Counter:
+        '''
+            Counts how many twitter ads were displayed on which location
+            of your profile while you were browsing twitter
+        '''
+        return Counter(map(lambda e: e.displayLocation, self.all))
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
