@@ -37,5 +37,29 @@ def plotAdTargetDeviceTypes(data: Engagements, title: str, sink: str) -> bool:
         return False
 
 
+def plotPercentageOfShownAdsByLocationOfDisplay(data: Engagements, title: str, sink: str) -> bool:
+    try:
+        _tmp = data.percentageOfAdsByDisplayLocation()
+        x = [i[0] for i in _tmp]
+        y = [i[1] for i in _tmp]
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(16, 9), dpi=100)
+            sns.set_style('darkgrid')
+
+            sns.barplot(x=x, y=y, ax=fig.gca())
+
+            fig.gca().ylim(0, 100)
+            fig.gca().set_title(title, fontsize=20, pad=10)
+            fig.tight_layout(pad=4)
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
