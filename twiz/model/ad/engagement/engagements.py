@@ -30,6 +30,16 @@ class Engagements:
         '''
         return Counter(map(lambda e: e.displayLocation, self.all))
 
+    def percentageOfAdsByDisplayLocation(self) -> List[Tuple[str, float]]:
+        '''
+            Percentage distribution of total ads shown on twitter to YOU,
+            in terms of location of ad display
+        '''
+        _buffer = self.countByDisplayLocation()
+        _total = sum(_buffer.values())
+
+        return [(i, (_buffer[i] / _total) * 100) for i in _buffer]
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
