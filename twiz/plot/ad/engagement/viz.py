@@ -43,13 +43,25 @@ def plotPercentageOfShownAdsByLocationOfDisplay(data: Engagements, title: str, s
         x = [i[0] for i in _tmp]
         y = [i[1] for i in _tmp]
 
+        _counts = data.countByDisplayLocation()
+        _counts = [_counts[i] for i in x]
+
         with plt.style.context('dark_background'):
             fig = plt.Figure(figsize=(16, 9), dpi=100)
 
             sns.barplot(x=x, y=y, ax=fig.gca(), palette='BuGn_r')
 
+            for i, j in enumerate(fig.gca().patches):
+                fig.gca().text(j.get_x() + j.get_width() * .5,
+                               j.get_y() + j.get_height() * .5,
+                               _counts[i],
+                               ha='center',
+                               rotation=0,
+                               fontsize=16,
+                               color='white')
+
             fig.gca().set_ylim(0, 100)
-            fig.gca().set_title(title, fontsize=20, pad=10)
+            fig.gca().set_title(title, fontsize=20, pad=14)
             fig.tight_layout(pad=4)
 
             fig.savefig(sink, pad_inches=.8)

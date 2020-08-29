@@ -129,7 +129,7 @@ def main():
                     _joinName(_accountDisplayName))),
             plotPercentageOfShownAdsByLocationOfDisplay(
                 _engagements,
-                'Twitter Advertisement Count, for {}, by on-screen display location'.format(
+                'Twitter Ads for {}, by on-screen display location'.format(
                     _accountDisplayName),
                 'plots/twitterAdCountByDisplayLocationFor{}.png'.format(
                     _joinName(_accountDisplayName))
