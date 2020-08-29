@@ -41,5 +41,6 @@ twiz path-to-twitter-data.zip sink/
 - Advertisement
     - Engagements
         - [Twitter Advertisements targeting YOU on various devices](./docs/twitterAdsTargetingYOUOnDevices.md)
+        - [Twitter Ads for *YOU*, by on-screen display location](./docs/twitterAdCountByDisplayLocationForYOU.md)
 
 **This section will keep getting populated ;)**
