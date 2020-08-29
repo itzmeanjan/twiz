@@ -38,4 +38,8 @@ twiz path-to-twitter-data.zip sink/
     - [x] [Top 10 **@TaggedTwitterUsers** found in tweets liked by YOU](./docs/top10TaggedTwitterUsersFoundInTweetsLikedByYOU.md)
     - [x] [Top 10 Emojis found in tweets liked by YOU](./docs/top10EmojisFoundInTweetsLikedByYOU.md)
 
+- Advertisement
+    - Engagements
+        - [Twitter Advertisements targeting YOU on various devices](./docs/twitterAdsTargetingYOUOnDevices.md)
+
 **This section will keep getting populated ;)**
