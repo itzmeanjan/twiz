@@ -17,7 +17,10 @@ from .plot.util import (
     plotTopXTaggedUsersFoundInLikedTweets,
     plotTopXEmojisFoundInLikedTweets
 )
-from .plot.ad.engagement.viz import plotAdTargetDeviceTypes
+from .plot.ad.engagement.viz import (
+    plotAdTargetDeviceTypes,
+    plotPercentageOfShownAdsByLocationOfDisplay
+)
 from time import time
 
 
@@ -123,7 +126,14 @@ def main():
                 'Twitter advertisements targeting {} on devices'.format(
                     _accountDisplayName),
                 'plots/twitterAdsTargeting{}OnDevices.png'.format(
-                    _joinName(_accountDisplayName)))
+                    _joinName(_accountDisplayName))),
+            plotPercentageOfShownAdsByLocationOfDisplay(
+                _engagements,
+                'Twitter Advertisement Count, for {}, by on-screen display location'.format(
+                    _accountDisplayName),
+                'plots/twitterAdCountByDisplayLocationFor{}.png'.format(
+                    _joinName(_accountDisplayName))
+            )
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(

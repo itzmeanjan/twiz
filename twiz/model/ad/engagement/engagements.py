@@ -38,7 +38,9 @@ class Engagements:
         _buffer = self.countByDisplayLocation()
         _total = sum(_buffer.values())
 
-        return [(i, (_buffer[i] / _total) * 100) for i in _buffer]
+        return [(i, (_buffer[i] / _total) * 100) for i in sorted(_buffer,
+                                                                 key=lambda e: _buffer[e],
+                                                                 reverse=True)]
 
 
 if __name__ == '__main__':

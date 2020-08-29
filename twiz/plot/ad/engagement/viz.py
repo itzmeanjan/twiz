@@ -45,11 +45,10 @@ def plotPercentageOfShownAdsByLocationOfDisplay(data: Engagements, title: str, s
 
         with plt.style.context('dark_background'):
             fig = plt.Figure(figsize=(16, 9), dpi=100)
-            sns.set_style('darkgrid')
 
-            sns.barplot(x=x, y=y, ax=fig.gca())
+            sns.barplot(x=x, y=y, ax=fig.gca(), palette='BuGn_r')
 
-            fig.gca().ylim(0, 100)
+            fig.gca().set_ylim(0, 100)
             fig.gca().set_title(title, fontsize=20, pad=10)
             fig.tight_layout(pad=4)
 
