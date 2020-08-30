@@ -95,11 +95,11 @@ def plotShownAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements, title: 
         _x, _y, _hue = _prepareDataForTwitterAdsGroupedByDeviceTypeAndDisplayLocation(
             data)
 
-        with plt.style.context('ggplot'):
+        with plt.style.context('dark_background'):
             fig = plt.Figure(figsize=(16, 9), dpi=100)
 
             sns.barplot(x=_x, y=_y, hue=_hue,
-                        ax=fig.gca(), palette='Reds')
+                        ax=fig.gca(), palette='PuRd')
 
             fig.gca().set_title(title, fontsize=20, pad=14)
             fig.tight_layout(pad=4)
