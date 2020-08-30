@@ -2,7 +2,7 @@
 
 import seaborn as sns
 from matplotlib import pyplot as plt
-from typing import List
+from typing import List, Tuple
 from twiz.model.ad.engagement.engagements import Engagements
 from functools import reduce
 from itertools import chain
@@ -74,7 +74,12 @@ def plotPercentageOfShownAdsByLocationOfDisplay(data: Engagements, title: str, s
         return False
 
 
-def _prepareDataForTwitterAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements):
+def _prepareDataForTwitterAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements) -> Tuple[List[str], List[int], List[str]]:
+    '''
+        Preparing data for plotting group bar chart, depicting how many twitter ads
+        were shown on which device & how many in each of them were shown on which portion
+        of display
+    '''
     _tmp = data.groupAdCountByDeviceTypeAndDisplayLocation()
     _displayLocations = list(set(reduce(
         lambda acc, cur: acc + list(cur),
@@ -91,6 +96,11 @@ def _prepareDataForTwitterAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagem
 
 
 def plotShownAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements, title: str, sink: str) -> bool:
+    '''
+        Plotting grouped bar chart, showing how many twitter ads
+        were shown on which device & how many in each of them 
+        were shown on which portion of display
+    '''
     try:
         _x, _y, _hue = _prepareDataForTwitterAdsGroupedByDeviceTypeAndDisplayLocation(
             data)
@@ -108,8 +118,7 @@ def plotShownAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements, title: 
             plt.close(fig)
 
         return True
-    except Exception as e:
-        print(e)
+    except Exception:
         return False
 
 
