@@ -1,4 +1,7 @@
 # twiz
+
+![banner](.banner/banner.png)
+
 Your Twitter Account Data Analysis &amp; Visualization Tool &lt;3
 
 ## motivation
