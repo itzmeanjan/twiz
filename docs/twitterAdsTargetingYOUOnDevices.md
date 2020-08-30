@@ -1,4 +1,4 @@
-# Twitter Advertisements targeting YOU on various devices
+# Twitter Ads for **YOU**, by target device type
 
 ## intro
 

@@ -1,4 +1,7 @@
 # twiz
+
+![banner](.banner/banner.png)
+
 Your Twitter Account Data Analysis &amp; Visualization Tool &lt;3
 
 ## motivation
@@ -40,7 +43,8 @@ twiz path-to-twitter-data.zip sink/
 
 - Advertisement
     - Engagements
-        - [Twitter Advertisements targeting YOU on various devices](./docs/twitterAdsTargetingYOUOnDevices.md)
-        - [Twitter Ads for *YOU*, by on-screen display location](./docs/twitterAdCountByDisplayLocationForYOU.md)
+        - [x] [Twitter Ads for **YOU**, by target device type](./docs/twitterAdsTargetingYOUOnDevices.md)
+        - [x] [Twitter Ads for **YOU**, by on-screen display location](./docs/twitterAdCountByDisplayLocationForYOU.md)
+        - [x] [Twitter Ads for **YOU**, grouped by target Device Type & on-screen Ad Display Location](./docs/twitterAdsGroupedByDeviceTypeAndDisplayLocationForYOU.md)
 
 **This section will keep getting populated ;)**

@@ -19,7 +19,8 @@ from .plot.util import (
 )
 from .plot.ad.engagement.viz import (
     plotAdTargetDeviceTypes,
-    plotPercentageOfShownAdsByLocationOfDisplay
+    plotPercentageOfShownAdsByLocationOfDisplay,
+    plotShownAdsGroupedByDeviceTypeAndDisplayLocation
 )
 from time import time
 
@@ -42,7 +43,7 @@ def _calculateSuccess(_data: List[bool]) -> float:
 
 
 def _banner():
-    print('\x1b[1;6;36;49m[+]twiz v0.2.1 - Your Twitter Account Data Analysis & Visualization Tool <3\x1b[0m\n\n\t\x1b[3;39;40m$ twiz `path-to-zip-file` `path-to-sink-directory`\x1b[0m\n\n[+]Author: Anjan Roy <anjanroy@yandex.com>\n[+]Source: https://github.com/itzmeanjan/twiz ( CC0-1.0 Licensed )\n')
+    print('\x1b[1;6;36;49m[+]twiz v0.2.2 - Your Twitter Account Data Analysis & Visualization Tool <3\x1b[0m\n\n\t\x1b[3;39;40m$ twiz `path-to-zip-file` `path-to-sink-directory`\x1b[0m\n\n[+]Author: Anjan Roy <anjanroy@yandex.com>\n[+]Source: https://github.com/itzmeanjan/twiz ( CC0-1.0 Licensed )\n')
 
 
 def _joinName(name: str) -> str:
@@ -123,7 +124,7 @@ def main():
                     _joinName(_accountDisplayName))),
             plotAdTargetDeviceTypes(
                 _engagements,
-                'Twitter advertisements targeting {} on devices'.format(
+                'Twitter Ads for {}, by target device type'.format(
                     _accountDisplayName),
                 'plots/twitterAdsTargeting{}OnDevices.png'.format(
                     _joinName(_accountDisplayName))),
@@ -132,8 +133,13 @@ def main():
                 'Twitter Ads for {}, by on-screen display location'.format(
                     _accountDisplayName),
                 'plots/twitterAdCountByDisplayLocationFor{}.png'.format(
-                    _joinName(_accountDisplayName))
-            )
+                    _joinName(_accountDisplayName))),
+            plotShownAdsGroupedByDeviceTypeAndDisplayLocation(
+                _engagements,
+                'Twitter Ads for {}, grouped by Device Type & on-screen Display Location'.format(
+                    _accountDisplayName),
+                'plots/twitterAdsGroupedByDeviceTypeAndDisplayLocationFor{}.png'.format(
+                    _joinName(_accountDisplayName)))
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
