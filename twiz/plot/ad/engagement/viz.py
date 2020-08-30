@@ -4,6 +4,8 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from typing import List
 from twiz.model.ad.engagement.engagements import Engagements
+from functools import reduce
+from itertools import chain
 
 
 def plotAdTargetDeviceTypes(data: Engagements, title: str, sink: str) -> bool:
@@ -61,6 +63,36 @@ def plotPercentageOfShownAdsByLocationOfDisplay(data: Engagements, title: str, s
                                color='white')
 
             fig.gca().set_ylim(0, 100)
+            fig.gca().set_title(title, fontsize=20, pad=14)
+            fig.tight_layout(pad=4)
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
+def plotShownAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements, title: str, sink: str) -> bool:
+    try:
+        _tmp = data.groupAdCountByDeviceTypeAndDisplayLocation()
+        _displayLocations = list(set(reduce(
+            lambda acc, cur: acc + list(cur),
+            map(lambda e: e.keys(), _tmp.values()), [])))
+
+        _x = list(chain.from_iterable(
+            [[i] * len(_displayLocations) for i in _tmp.keys()]))
+        _y = [_tmp[j].get(_displayLocations[i], 0) for i, j in enumerate(_x)]
+        _hue = list(chain.from_iterable(
+            [_displayLocations * (len(_x) / len(_displayLocations))]))
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(16, 9), dpi=100)
+
+            sns.barplot(x=_x, y=_y, hue=_hue,
+                        ax=fig.gca(), palette='BuGn_r')
+
             fig.gca().set_title(title, fontsize=20, pad=14)
             fig.tight_layout(pad=4)
 
