@@ -74,24 +74,32 @@ def plotPercentageOfShownAdsByLocationOfDisplay(data: Engagements, title: str, s
         return False
 
 
+def _prepareDataForTwitterAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements):
+    _tmp = data.groupAdCountByDeviceTypeAndDisplayLocation()
+    _displayLocations = list(set(reduce(
+        lambda acc, cur: acc + list(cur),
+        map(lambda e: e.keys(), _tmp.values()), [])))
+
+    _x = list(chain.from_iterable(
+        [[i] * len(_displayLocations) for i in _tmp.keys()]))
+    _y = [_tmp[j].get(_displayLocations[i % len(_displayLocations)], 0)
+          for i, j in enumerate(_x)]
+    _hue = list(chain.from_iterable(
+        [_displayLocations * (len(_x) // len(_displayLocations))]))
+
+    return _x, _y, _hue
+
+
 def plotShownAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements, title: str, sink: str) -> bool:
     try:
-        _tmp = data.groupAdCountByDeviceTypeAndDisplayLocation()
-        _displayLocations = list(set(reduce(
-            lambda acc, cur: acc + list(cur),
-            map(lambda e: e.keys(), _tmp.values()), [])))
+        _x, _y, _hue = _prepareDataForTwitterAdsGroupedByDeviceTypeAndDisplayLocation(
+            data)
 
-        _x = list(chain.from_iterable(
-            [[i] * len(_displayLocations) for i in _tmp.keys()]))
-        _y = [_tmp[j].get(_displayLocations[i], 0) for i, j in enumerate(_x)]
-        _hue = list(chain.from_iterable(
-            [_displayLocations * (len(_x) / len(_displayLocations))]))
-
-        with plt.style.context('dark_background'):
+        with plt.style.context('ggplot'):
             fig = plt.Figure(figsize=(16, 9), dpi=100)
 
             sns.barplot(x=_x, y=_y, hue=_hue,
-                        ax=fig.gca(), palette='BuGn_r')
+                        ax=fig.gca(), palette='Reds')
 
             fig.gca().set_title(title, fontsize=20, pad=14)
             fig.tight_layout(pad=4)
@@ -100,7 +108,8 @@ def plotShownAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements, title: 
             plt.close(fig)
 
         return True
-    except Exception:
+    except Exception as e:
+        print(e)
         return False
 
 
