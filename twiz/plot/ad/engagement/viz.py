@@ -122,5 +122,33 @@ def plotShownAdsGroupedByDeviceTypeAndDisplayLocation(data: Engagements, title: 
         return False
 
 
+def plotAdsCountGroupedByAdvertiserNames(data: Engagements, x: int, title: str, sink: str) -> bool:
+    '''
+        We're going to plot how many ads user has engaged in from certain advertiser,
+        as a bar plot. Top X advertisers to be plotted, denoted by their name, userid omitted.
+    '''
+    try:
+        _ads = data.topXAdvertiserNames(x)
+
+        _x = [i[1] for i in _ads]
+        _y = [i[0] for i in _ads]
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(16, 9), dpi=100)
+
+            sns.barplot(x=_x, y=_y, ax=fig.gca(),
+                        palette='PuRd', orient='h')
+
+            fig.gca().set_title(title, fontsize=20, pad=16)
+            fig.tight_layout(pad=4)
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')

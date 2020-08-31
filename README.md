@@ -46,5 +46,6 @@ twiz path-to-twitter-data.zip sink/
         - [x] [Twitter Ads for **YOU**, by target device type](./docs/twitterAdsTargetingYOUOnDevices.md)
         - [x] [Twitter Ads for **YOU**, by on-screen display location](./docs/twitterAdCountByDisplayLocationForYOU.md)
         - [x] [Twitter Ads for **YOU**, grouped by target Device Type & on-screen Ad Display Location](./docs/twitterAdsGroupedByDeviceTypeAndDisplayLocationForYOU.md)
+        - [x] [Twitter Ads YOU engaged in, grouped by Advertiser Names](./docs/twitterAdsCountGroupedByAdvertiserNamesForYOU.md)
 
 **This section will keep getting populated ;)**
