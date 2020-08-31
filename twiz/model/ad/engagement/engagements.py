@@ -62,11 +62,18 @@ class Engagements:
                                    self.all),
                                {}).items()))
 
-    def groupAdCountByAdvertiserName(self) -> Counter:
+    def adCountGroupedByAdvertiserName(self) -> Counter:
         '''
             How many ads this user engaged in from each advertiser
         '''
         return Counter(map(lambda e: e.advertiser.fullName, self.all))
+
+    def topXAdvertiserNames(self, x: int) -> List[Tuple[str, int]]:
+        '''
+            Returns a list of top X advertisers in terms of number of ads 
+            engaged in
+        '''
+        return self.adCountGroupedByAdvertiserName().most_common(x)
 
 
 if __name__ == '__main__':
