@@ -62,6 +62,12 @@ class Engagements:
                                    self.all),
                                {}).items()))
 
+    def groupAdCountByAdvertiserName(self) -> Counter:
+        '''
+            How many ads this user engaged in from each advertiser
+        '''
+        return Counter(map(lambda e: e.advertiser.fullName, self.all))
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
