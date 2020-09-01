@@ -150,5 +150,43 @@ def plotAdsCountGroupedByAdvertiserNames(data: Engagements, x: int, title: str, 
         return False
 
 
+def plotAdsCountGroupedByEngagementTypes(data: Engagements, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting ad count by grouping ads by their engagement types i.e.
+        depicts how twitter ads were trying to engage you & in which way they happened
+        mostly.
+    '''
+    try:
+        _ads = data.topXEngagementTypes(x)
+
+        _x = [i[1] for i in _ads]
+        _y = [i[0] for i in _ads]
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(16, 9), dpi=100)
+
+            sns.barplot(x=_x, y=_y, ax=fig.gca(),
+                        palette='YlOrRd', orient='h')
+
+            for i, j in enumerate(fig.gca().patches):
+                fig.gca().text(j.get_x() + j.get_width() * .5,
+                               j.get_y() + j.get_height() * .5,
+                               _x[i],
+                               ha='center',
+                               rotation=0,
+                               fontsize=12,
+                               color='black')
+
+            fig.gca().set_title(title, fontsize=20, pad=16)
+            fig.tight_layout(pad=4)
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
