@@ -21,7 +21,8 @@ from .plot.ad.engagement.viz import (
     plotAdTargetDeviceTypes,
     plotPercentageOfShownAdsByLocationOfDisplay,
     plotShownAdsGroupedByDeviceTypeAndDisplayLocation,
-    plotAdsCountGroupedByAdvertiserNames
+    plotAdsCountGroupedByAdvertiserNames,
+    plotAdsCountGroupedByEngagementTypes
 )
 from time import time
 
@@ -146,7 +147,12 @@ def main():
                 15,
                 f'Top 15 Twitter Advertisers {_accountDisplayName} interacted with',
                 'plots/twitterAdsCountGroupedByAdvertiserNamesFor{}.png'.format(
-                    _joinName(_accountDisplayName)))
+                    _joinName(_accountDisplayName))),
+            plotAdsCountGroupedByEngagementTypes(
+                _engagements,
+                15,
+                f'Top 15 Ad Engagement Types Twitter used for {_accountDisplayName}',
+                f'plots/twitterAdsCountGroupedByEngagementTypesFor{_joinName(_accountDisplayName)}.png')
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
