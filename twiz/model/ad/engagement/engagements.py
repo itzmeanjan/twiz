@@ -75,6 +75,14 @@ class Engagements:
         '''
         return self.adCountGroupedByAdvertiserName().most_common(x)
 
+    def adCountGroupedByEngagementType(self) -> Counter:
+        '''
+            Counts how many ad engagements happened in which way i.e.
+            {EmbeddedMedia, ChargeableImpression}
+        '''
+        return Counter(chain.from_iterable(
+            map(lambda e: map(lambda _e: _e.type, e.attrs), self.all)))
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
