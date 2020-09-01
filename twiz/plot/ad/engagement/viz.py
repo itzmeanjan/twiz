@@ -160,6 +160,7 @@ def plotAdsCountGroupedByEngagementTypes(data: Engagements, x: int, title: str, 
         _ads = data.topXEngagementTypes(x)
 
         _x = [i[1] for i in _ads]
+        _sum = sum(_x)
         _y = [i[0] for i in _ads]
 
         with plt.style.context('dark_background'):
@@ -171,10 +172,10 @@ def plotAdsCountGroupedByEngagementTypes(data: Engagements, x: int, title: str, 
             for i, j in enumerate(fig.gca().patches):
                 fig.gca().text(j.get_x() + j.get_width() * .5,
                                j.get_y() + j.get_height() * .5,
-                               _x[i],
+                               '{:.2f} %'.format((_x[i] / _sum) * 100),
                                ha='center',
                                rotation=0,
-                               fontsize=12,
+                               fontsize=10,
                                color='black')
 
             fig.gca().set_title(title, fontsize=20, pad=16)
