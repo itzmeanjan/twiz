@@ -75,6 +75,21 @@ class Engagements:
         '''
         return self.adCountGroupedByAdvertiserName().most_common(x)
 
+    def adCountGroupedByEngagementType(self) -> Counter:
+        '''
+            Counts how many ad engagements happened in which way i.e.
+            {EmbeddedMedia, ChargeableImpression}
+        '''
+        return Counter(chain.from_iterable(
+            map(lambda e: map(lambda _e: _e.type, e.attrs), self.all)))
+
+    def topXEngagementTypes(self, x: int) -> List[Tuple[str, int]]:
+        '''
+            Top X ways how you got engaged with a twitter advertisement i.e.
+            rather twitter engaged you in
+        '''
+        return self.adCountGroupedByEngagementType().most_common(x)
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
