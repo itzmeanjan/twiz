@@ -179,6 +179,7 @@ def plotAdsCountGroupedByEngagementTypes(data: Engagements, x: int, title: str, 
                                color='black')
 
             fig.gca().set_title(title, fontsize=20, pad=16)
+            fig.tight_layout()
 
             fig.savefig(sink, pad_inches=.8)
             plt.close(fig)
