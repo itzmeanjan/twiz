@@ -106,7 +106,20 @@ class Engagements:
 
         return dict(map(lambda e: (e[0], Counter(chain.from_iterable(e[1]))),
                         reduce(_groupIt, map(lambda e: (e.advertiser.fullName,
-                                                        map(lambda _e: _e.type, e.attrs)), self.all), {})))
+                                                        map(lambda _e: _e.type, e.attrs)), self.all), {}).items()))
+
+    def topXAdvertiserNamesWithRespectiveEngagementTypes(self, x: int):
+        '''
+            Returns top X advertisers with their respective engagement types & counts used
+            for showing you ad on twitter
+        '''
+        _ads = self.groupAdCountByAdvertiserNameAndEngagementTypes()
+
+        _topX = sorted(_ads,
+                       key=lambda e: sum(_ads[e].values()),
+                       reverse=True)[:x]
+
+        return dict(map(lambda e: (e, _ads[e]), _topX))
 
 
 if __name__ == '__main__':
