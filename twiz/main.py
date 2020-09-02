@@ -22,7 +22,8 @@ from .plot.ad.engagement.viz import (
     plotPercentageOfShownAdsByLocationOfDisplay,
     plotShownAdsGroupedByDeviceTypeAndDisplayLocation,
     plotAdsCountGroupedByAdvertiserNames,
-    plotAdsCountGroupedByEngagementTypes
+    plotAdsCountGroupedByEngagementTypes,
+    plotTopXAdvertisersAsHeatMap
 )
 from time import time
 
@@ -152,7 +153,12 @@ def main():
                 _engagements,
                 15,
                 f'Top 15 Ad Engagement Types Twitter used for {_accountDisplayName}',
-                f'plots/twitterAdsCountGroupedByEngagementTypesFor{_joinName(_accountDisplayName)}.png')
+                f'plots/twitterAdsCountGroupedByEngagementTypesFor{_joinName(_accountDisplayName)}.png'),
+            plotTopXAdvertisersAsHeatMap(
+                _engagements,
+                15,
+                f'Top 15 Twitter Advertisers with Engagement Types for {_accountDisplayName}',
+                f'plots/twitterAdsCountGroupedByAdvertiserNamesAndEngagementTypesFor{_joinName(_accountDisplayName)}.png')
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
