@@ -150,6 +150,22 @@ class Engagements:
         return list(chain.from_iterable(map(lambda e: map(lambda _e: _e, e.criterias),
                                             self.getEngagementsByAdvertiserName(advertiser))))
 
+    def getGroupedTargetingCriteriasByAdvertiserName(self, advertiser: str):
+        '''
+            Groups all targeting criterias for a specific advertiser, by their
+            respective criteria type
+        '''
+        def _groupBy(acc: Dict[str, List[str]], cur: MatchedCriteria) -> Dict[str, List[str]]:
+            if cur.type in acc:
+                acc[cur.type].append(cur.value)
+            else:
+                acc[cur.type] = [cur.value]
+
+            return acc
+
+        return reduce(_groupBy,
+                      self.getMatchedTargetingCriteriasByAdvertiserName(advertiser), {})
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
