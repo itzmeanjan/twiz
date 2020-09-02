@@ -219,7 +219,7 @@ def plotTopXAdvertisersAsHeatMap(data: Engagements, x: int, title: str, sink: st
             fig = plt.Figure(figsize=(18, 10), dpi=200)
 
             sns.heatmap(_data, lw=.75,
-                        cmap='YlOrRd', ax=fig.gca())
+                        cmap='YlGnBu', ax=fig.gca())
 
             fig.gca().set_xticklabels(_x, rotation=72)
             fig.gca().tick_params(axis='x', which='major', labelsize=10)
