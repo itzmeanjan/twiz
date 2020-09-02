@@ -121,6 +121,20 @@ class Engagements:
 
         return dict(map(lambda e: (e, _ads[e]), _topX))
 
+    def groupEngagementsByAdvertiserName(self) -> Dict[str, List[Engagement]]:
+        '''
+            Groups all engagements by their respective advertiser's screen name
+        '''
+        def _groupBy(acc: Dict[str, List[Engagement]], cur: Engagement) -> Dict[str, List[Engagement]]:
+            if cur.advertiser.fullName in acc:
+                acc[cur.advertiser.fullName].append(cur)
+            else:
+                acc[cur.advertiser.fullName] = [cur]
+
+            return acc
+
+        return reduce(_groupBy, self.all, {})
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
