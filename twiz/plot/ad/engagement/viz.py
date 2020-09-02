@@ -189,5 +189,21 @@ def plotAdsCountGroupedByEngagementTypes(data: Engagements, x: int, title: str, 
         return False
 
 
+def _prepareDataForTopXAdvertisersWithRespectiveEngagementTypes(data: Engagements, x: int) -> Tuple[List[str], List[str], List[List[str]]]:
+    '''
+        Preparing data for plotting heat map showing which of top advertisers used
+        what kind of engagement types how many times. 
+    '''
+    _ads = data.topXAdvertiserNamesWithRespectiveEngagementTypes(x)
+
+    _x = sorted(set(chain.from_iterable(
+        [tuple(i.keys()) for i in _ads.values()])))
+    _y = sorted(_ads, key=lambda e: sum(_ads[e].values()))
+
+    _counts = [[_ads[i].get(j, 0) for j in _x] for i in _y]
+
+    return _x, _y, _counts
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
