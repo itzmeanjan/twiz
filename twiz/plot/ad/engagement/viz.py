@@ -189,5 +189,53 @@ def plotAdsCountGroupedByEngagementTypes(data: Engagements, x: int, title: str, 
         return False
 
 
+def _prepareDataForTopXAdvertisersWithRespectiveEngagementTypes(data: Engagements, x: int) -> Tuple[List[str], List[str], List[List[str]]]:
+    '''
+        Preparing data for plotting heat map showing which of top advertisers used
+        what kind of engagement types how many times. 
+    '''
+    _ads = data.topXAdvertiserNamesWithRespectiveEngagementTypes(x)
+
+    _x = sorted(set(chain.from_iterable(
+        [tuple(i.keys()) for i in _ads.values()])))
+    _y = sorted(_ads, key=lambda e: sum(_ads[e].values()))
+
+    _counts = [[_ads[i].get(j, 0) for j in _x] for i in _y]
+
+    return _y, _x, _counts
+
+
+def plotTopXAdvertisersAsHeatMap(data: Engagements, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting top X advertisers with their respective engagement type & count
+        as heatmap
+    '''
+    try:
+        _y, _x, _data =\
+            _prepareDataForTopXAdvertisersWithRespectiveEngagementTypes(
+                data, x)
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(18, 10), dpi=200)
+
+            sns.heatmap(_data, lw=.75,
+                        cmap='YlOrRd', ax=fig.gca())
+
+            fig.gca().set_xticklabels(_x, rotation=72)
+            fig.gca().tick_params(axis='x', which='major', labelsize=10)
+            fig.gca().set_yticklabels(_y, rotation=0)
+            fig.gca().tick_params(axis='y', which='major', labelsize=12)
+
+            fig.gca().set_title(title, fontsize=20, pad=16)
+            fig.tight_layout()
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
