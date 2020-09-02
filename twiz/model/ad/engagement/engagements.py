@@ -135,6 +135,12 @@ class Engagements:
 
         return reduce(_groupBy, self.all, {})
 
+    def getEngagementsByAdvertiserName(self, advertiser: str) -> List[Engagement]:
+        '''
+            Returns a list of all engagements, when advertiser name is given
+        '''
+        return self.groupEngagementsByAdvertiserName().get(advertiser)
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
