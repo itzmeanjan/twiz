@@ -157,7 +157,7 @@ def main():
             plotTopXAdvertisersAsHeatMap(
                 _engagements,
                 15,
-                f'Top 15 Twitter Advertisers with Engagement Types for {_accountDisplayName}',
+                f'Top 15 Twitter Advertisers with respective Engagement Types for {_accountDisplayName}',
                 f'plots/twitterAdsCountGroupedByAdvertiserNamesAndEngagementTypesFor{_joinName(_accountDisplayName)}.png')
         ]
 

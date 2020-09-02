@@ -216,15 +216,15 @@ def plotTopXAdvertisersAsHeatMap(data: Engagements, x: int, title: str, sink: st
                 data, x)
 
         with plt.style.context('dark_background'):
-            fig = plt.Figure(figsize=(16, 9), dpi=100)
+            fig = plt.Figure(figsize=(18, 10), dpi=200)
 
             sns.heatmap(_data, lw=.75,
-                        cmap='YlGnBu', ax=fig.gca())
+                        cmap='YlOrRd', ax=fig.gca())
 
-            fig.gca().set_xticklabels(_x, rotation=90)
-            fig.gca().tick_params(axis='x', which='major', labelsize=8)
+            fig.gca().set_xticklabels(_x, rotation=72)
+            fig.gca().tick_params(axis='x', which='major', labelsize=10)
             fig.gca().set_yticklabels(_y, rotation=0)
-            fig.gca().tick_params(axis='y', which='major', labelsize=14)
+            fig.gca().tick_params(axis='y', which='major', labelsize=12)
 
             fig.gca().set_title(title, fontsize=20, pad=16)
             fig.tight_layout()
