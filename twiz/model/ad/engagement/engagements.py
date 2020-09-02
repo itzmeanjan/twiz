@@ -150,7 +150,7 @@ class Engagements:
         return list(chain.from_iterable(map(lambda e: map(lambda _e: _e, e.criterias),
                                             self.getEngagementsByAdvertiserName(advertiser))))
 
-    def getGroupedTargetingCriteriasByAdvertiserName(self, advertiser: str):
+    def getGroupedTargetingCriteriasByAdvertiserName(self, advertiser: str) -> Dict[str, Counter]:
         '''
             Groups all targeting criterias for a specific advertiser, by their
             respective criteria type & under each of them keep a counter for all values

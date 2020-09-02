@@ -237,5 +237,18 @@ def plotTopXAdvertisersAsHeatMap(data: Engagements, x: int, title: str, sink: st
         return False
 
 
+def _prepareDataForPlottingTargetCriteriasByAdvertiserName(data: Engagements, advertiser: str):
+    def _prepareDataForTargetType(elem: str) -> Tuple[str, List[str], List[int]]:
+        _x = list(_data[elem].keys())
+        _y = [_data[elem][i] for i in _x]
+
+        return elem, _x, _y
+
+    _data = data.getGroupedTargetingCriteriasByAdvertiserName(advertiser)
+    _keys = list(filter(lambda e: len(_data[e]) > 1, _data.keys()))
+
+    return map(_prepareDataForTargetType, _keys)
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
