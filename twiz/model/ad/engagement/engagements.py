@@ -90,6 +90,24 @@ class Engagements:
         '''
         return self.adCountGroupedByEngagementType().most_common(x)
 
+    def groupAdCountByAdvertiserNameAndEngagementTypes(self):
+        '''
+            Groups advertisement counts by advertiser name & under each of those
+            respective engagement type used for showing advertisement, along with their
+            count
+        '''
+        def _groupIt(acc: Dict[str, List[map]], cur: Tuple[str, map]) -> Dict[str, List[map]]:
+            if cur[0] in acc:
+                acc[cur[0]].append(cur[1])
+            else:
+                acc[cur[0]] = [cur[1]]
+
+            return acc
+
+        return dict(map(lambda e: (e[0], Counter(chain.from_iterable(e[1]))),
+                        reduce(_groupIt, map(lambda e: (e.advertiser.fullName,
+                                                        map(lambda _e: _e.type, e.attrs)), self.all), {})))
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
