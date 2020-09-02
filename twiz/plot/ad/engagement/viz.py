@@ -202,7 +202,7 @@ def _prepareDataForTopXAdvertisersWithRespectiveEngagementTypes(data: Engagement
 
     _counts = [[_ads[i].get(j, 0) for j in _x] for i in _y]
 
-    return _x, _y, _counts
+    return _y, _x, _counts
 
 
 if __name__ == '__main__':
