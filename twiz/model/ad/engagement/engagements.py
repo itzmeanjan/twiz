@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .engagement import Engagement
+from .criteria import MatchedCriteria
 from typing import List, Dict, Any, Tuple
 from itertools import chain
 from collections import Counter
@@ -140,6 +141,14 @@ class Engagements:
             Returns a list of all engagements, when advertiser name is given
         '''
         return self.groupEngagementsByAdvertiserName().get(advertiser)
+
+    def getMatchedTargetingCriteriasByAdvertiserName(self, advertiser: str) -> List[MatchedCriteria]:
+        '''
+            Returns a list of all advertise targeting criterias used by a certain advertiser,
+            along with their respective values set by them
+        '''
+        return list(chain.from_iterable(map(lambda e: map(lambda _e: _e, e.criterias),
+                                            self.getEngagementsByAdvertiserName(advertiser))))
 
 
 if __name__ == '__main__':
