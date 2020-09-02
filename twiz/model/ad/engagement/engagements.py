@@ -153,7 +153,7 @@ class Engagements:
     def getGroupedTargetingCriteriasByAdvertiserName(self, advertiser: str):
         '''
             Groups all targeting criterias for a specific advertiser, by their
-            respective criteria type
+            respective criteria type & under each of them keep a counter for all values
         '''
         def _groupBy(acc: Dict[str, List[str]], cur: MatchedCriteria) -> Dict[str, List[str]]:
             if cur.type in acc:
@@ -163,8 +163,11 @@ class Engagements:
 
             return acc
 
-        return reduce(_groupBy,
-                      self.getMatchedTargetingCriteriasByAdvertiserName(advertiser), {})
+        return dict(map(lambda e: (e[0], Counter(e[1])),
+                        reduce(_groupBy,
+                               self.getMatchedTargetingCriteriasByAdvertiserName(
+                                   advertiser),
+                               {}).items()))
 
 
 if __name__ == '__main__':
