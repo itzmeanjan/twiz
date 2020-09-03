@@ -256,12 +256,22 @@ def _joinName(name: str) -> str:
 
 def plotTargetCriteriasForTopXAdvertisers(data: Engagements, x: int, title: str, sink: str) -> bool:
     try:
-        def _plot(advertiser: str, type: str, _x: List[str], _y: List[str]):
+        def _plot(advertiser: str, type: str, _x: List[str], _y: List[float]):
             with plt.style.context('dark_background'):
                 fig = plt.Figure(figsize=(16, 9), dpi=100)
 
                 sns.barplot(x=_y, y=_x, ax=fig.gca(),
                             palette='BuPu', orient='h')
+                _sum = sum(_y)
+
+                for i, j in enumerate(fig.gca().patches):
+                    fig.gca().text(j.get_x() + j.get_width() * .5,
+                                   j.get_y() + j.get_height() * .5,
+                                   '{:.2f} %'.format((_x[i] / _sum) * 100),
+                                   ha='center',
+                                   rotation=0,
+                                   fontsize=9,
+                                   color='black')
 
                 fig.gca().set_title('{}{} under {} category'.format(title, advertiser, type),
                                     fontsize=20, pad=16)
