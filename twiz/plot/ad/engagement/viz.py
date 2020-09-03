@@ -6,6 +6,7 @@ from typing import List, Tuple
 from twiz.model.ad.engagement.engagements import Engagements
 from functools import reduce
 from itertools import chain
+from twiz.main import _joinName
 
 
 def plotAdTargetDeviceTypes(data: Engagements, title: str, sink: str) -> bool:
@@ -259,11 +260,11 @@ def plotTargetCriteriasForTopXAdvertisers(data: Engagements, x: int, title: str,
                 sns.barplot(x=_x, y=_y, ax=fig.gca(),
                             palette='YlOrBr', orient='v')
 
-                fig.gca().set_title(title.format(advertiser, type),
+                fig.gca().set_title('{}{} under {} category'.format(title, advertiser, type),
                                     fontsize=20, pad=16)
                 fig.tight_layout()
 
-                fig.savefig(sink.format(k[0], type),
+                fig.savefig('{}{}{}.png'.format(sink, _joinName(advertiser), _joinName(type)),
                             pad_inches=.8)
                 plt.close(fig)
 
