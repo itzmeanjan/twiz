@@ -239,7 +239,7 @@ def plotTopXAdvertisersAsHeatMap(data: Engagements, x: int, title: str, sink: st
 
 def _prepareDataForPlottingTargetCriteriasByAdvertiserName(data: Engagements, advertiser: str) -> map:
     def _prepareDataForTargetType(elem: str) -> Tuple[str, List[str], List[int]]:
-        _x = list(_data[elem].keys())
+        _x = sorted(_data[elem].keys(), key=lambda e: _data[elem][e])
         _y = [_data[elem][i] for i in _x]
 
         return elem, _x, _y
@@ -267,7 +267,7 @@ def plotTargetCriteriasForTopXAdvertisers(data: Engagements, x: int, title: str,
                 for i, j in enumerate(fig.gca().patches):
                     fig.gca().text(j.get_x() + j.get_width() * .5,
                                    j.get_y() + j.get_height() * .5,
-                                   '{:.2f} %'.format((_x[i] / _sum) * 100),
+                                   '{:.2f} %'.format((_y[i] / _sum) * 100),
                                    ha='center',
                                    rotation=0,
                                    fontsize=9,
