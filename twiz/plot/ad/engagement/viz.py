@@ -237,5 +237,48 @@ def plotTopXAdvertisersAsHeatMap(data: Engagements, x: int, title: str, sink: st
         return False
 
 
+def _prepareDataForPlottingTargetCriteriasByAdvertiserName(data: Engagements, advertiser: str) -> map:
+    def _prepareDataForTargetType(elem: str) -> Tuple[str, List[str], List[int]]:
+        _x = sorted(_data[elem].keys(), key=lambda e: _data[elem][e])
+        _y = [_data[elem][i] for i in _x]
+
+        return elem, _x, _y
+
+    _data = data.getGroupedTargetingCriteriasByAdvertiserName(advertiser)
+    _keys = list(filter(lambda e: len(_data[e]) > 1, _data.keys()))
+
+    return map(_prepareDataForTargetType, _keys)
+
+
+def _joinName(name: str) -> str:
+    return '_'.join(name.split())
+
+
+def plotTargetCriteriasForTopXAdvertisers(data: Engagements, x: int, title: str, sink: str) -> bool:
+    try:
+        def _plot(advertiser: str, type: str, _x: List[str], _y: List[float]):
+            with plt.style.context('dark_background'):
+                fig = plt.Figure(figsize=(16, 9), dpi=100)
+
+                sns.barplot(x=_y, y=_x, ax=fig.gca(),
+                            palette='BuPu', orient='h')
+
+                fig.gca().set_title('{}{} under {} category'.format(title, advertiser, type),
+                                    fontsize=20, pad=16)
+                fig.tight_layout()
+
+                fig.savefig('{}{}{}.png'.format(sink, _joinName(advertiser), _joinName(type)),
+                            pad_inches=.8)
+                plt.close(fig)
+
+        for k in data.topXAdvertiserNames(x):
+            for v in _prepareDataForPlottingTargetCriteriasByAdvertiserName(data, k[0]):
+                _plot(k[0], *v)
+
+        return True
+    except Exception:
+        return False
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')

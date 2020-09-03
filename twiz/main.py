@@ -23,7 +23,8 @@ from .plot.ad.engagement.viz import (
     plotShownAdsGroupedByDeviceTypeAndDisplayLocation,
     plotAdsCountGroupedByAdvertiserNames,
     plotAdsCountGroupedByEngagementTypes,
-    plotTopXAdvertisersAsHeatMap
+    plotTopXAdvertisersAsHeatMap,
+    plotTargetCriteriasForTopXAdvertisers
 )
 from time import time
 
@@ -46,7 +47,7 @@ def _calculateSuccess(_data: List[bool]) -> float:
 
 
 def _banner():
-    print('\x1b[1;6;36;49m[+]twiz v0.2.4 - Your Twitter Account Data Analysis & Visualization Tool <3\x1b[0m\n\n\t\x1b[3;39;40m$ twiz `path-to-zip-file` `path-to-sink-directory`\x1b[0m\n\n[+]Author: Anjan Roy <anjanroy@yandex.com>\n[+]Source: https://github.com/itzmeanjan/twiz ( CC0-1.0 Licensed )\n')
+    print('\x1b[1;6;36;49m[+]twiz v0.2.5 - Your Twitter Account Data Analysis & Visualization Tool <3\x1b[0m\n\n\t\x1b[3;39;40m$ twiz `path-to-zip-file` `path-to-sink-directory`\x1b[0m\n\n[+]Author: Anjan Roy <anjanroy@yandex.com>\n[+]Source: https://github.com/itzmeanjan/twiz ( CC0-1.0 Licensed )\n')
 
 
 def _joinName(name: str) -> str:
@@ -158,7 +159,12 @@ def main():
                 _engagements,
                 15,
                 f'Top 15 Twitter Advertisers with respective Engagement Types for {_accountDisplayName}',
-                f'plots/twitterAdsCountGroupedByAdvertiserNamesAndEngagementTypesFor{_joinName(_accountDisplayName)}.png')
+                f'plots/twitterAdsCountGroupedByAdvertiserNamesAndEngagementTypesFor{_joinName(_accountDisplayName)}.png'),
+            plotTargetCriteriasForTopXAdvertisers(
+                _engagements,
+                5,
+                f'Twitter Ad Targeting Criterias used for {_accountDisplayName} by ',
+                f'plots/twitterAdTargetingCriteriasUsedFor{_joinName(_accountDisplayName)}By')
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
