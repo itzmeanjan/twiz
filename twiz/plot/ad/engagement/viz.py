@@ -6,7 +6,6 @@ from typing import List, Tuple
 from twiz.model.ad.engagement.engagements import Engagements
 from functools import reduce
 from itertools import chain
-from twiz.main import _joinName
 
 
 def plotAdTargetDeviceTypes(data: Engagements, title: str, sink: str) -> bool:
@@ -251,14 +250,18 @@ def _prepareDataForPlottingTargetCriteriasByAdvertiserName(data: Engagements, ad
     return map(_prepareDataForTargetType, _keys)
 
 
+def _joinName(name: str) -> str:
+    return '_'.join(name.split())
+
+
 def plotTargetCriteriasForTopXAdvertisers(data: Engagements, x: int, title: str, sink: str) -> bool:
     try:
         def _plot(advertiser: str, type: str, _x: List[str], _y: List[str]):
             with plt.style.context('dark_background'):
                 fig = plt.Figure(figsize=(16, 9), dpi=100)
 
-                sns.barplot(x=_x, y=_y, ax=fig.gca(),
-                            palette='YlOrBr', orient='v')
+                sns.barplot(x=_y, y=_x, ax=fig.gca(),
+                            palette='BuPu', orient='h')
 
                 fig.gca().set_title('{}{} under {} category'.format(title, advertiser, type),
                                     fontsize=20, pad=16)
