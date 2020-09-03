@@ -237,7 +237,7 @@ def plotTopXAdvertisersAsHeatMap(data: Engagements, x: int, title: str, sink: st
         return False
 
 
-def _prepareDataForPlottingTargetCriteriasByAdvertiserName(data: Engagements, advertiser: str):
+def _prepareDataForPlottingTargetCriteriasByAdvertiserName(data: Engagements, advertiser: str) -> map:
     def _prepareDataForTargetType(elem: str) -> Tuple[str, List[str], List[int]]:
         _x = list(_data[elem].keys())
         _y = [_data[elem][i] for i in _x]
@@ -250,24 +250,26 @@ def _prepareDataForPlottingTargetCriteriasByAdvertiserName(data: Engagements, ad
     return map(_prepareDataForTargetType, _keys)
 
 
-def plotTargetCriteriasForAdvertisers(data: Engagements, title: str, sink: str) -> bool:
+def plotTargetCriteriasForTopXAdvertisers(data: Engagements, x: int, title: str, sink: str) -> bool:
     try:
-        def _plot(type: str, _x: List[str], _y: List[str]):
+        def _plot(advertiser: str, type: str, _x: List[str], _y: List[str]):
             with plt.style.context('dark_background'):
                 fig = plt.Figure(figsize=(16, 9), dpi=100)
 
                 sns.barplot(x=_x, y=_y, ax=fig.gca(),
                             palette='YlOrBr', orient='v')
 
-                fig.gca().set_title(title, fontsize=20, pad=16)
+                fig.gca().set_title(title.format(advertiser, type),
+                                    fontsize=20, pad=16)
                 fig.tight_layout()
 
-                fig.savefig(sink, pad_inches=.8)
+                fig.savefig(sink.format(k[0], type),
+                            pad_inches=.8)
                 plt.close(fig)
 
-        for k in data.adCountGroupedByAdvertiserName().keys():
-            for v in _prepareDataForPlottingTargetCriteriasByAdvertiserName(data, k):
-                _plot(*v)
+        for k in data.topXAdvertiserNames(x):
+            for v in _prepareDataForPlottingTargetCriteriasByAdvertiserName(data, k[0]):
+                _plot(k[0], *v)
 
         return True
     except Exception:
