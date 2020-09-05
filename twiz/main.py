@@ -169,7 +169,7 @@ def main():
             plotTopXTargetCriteriasUsedByTwitterAdvertisers(
                 _engagements,
                 20,
-                f'Top 20 Ad target criterias used for {_accountDisplayName} on Twitter',
+                f'Top 20 Ad Target Criterias used for {_accountDisplayName} on Twitter',
                 f'plots/top20AdTargetCriteriasUsedFor{_joinName(_accountDisplayName)}OnTwitter.png')
         ]
 
