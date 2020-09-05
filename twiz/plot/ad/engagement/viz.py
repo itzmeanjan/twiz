@@ -280,5 +280,34 @@ def plotTargetCriteriasForTopXAdvertisers(data: Engagements, x: int, title: str,
         return False
 
 
+def plotTopXTargetCriteriasUsedByTwitterAdvertisers(data: Engagements, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting a bar chart depicting which ad target criteria was used mostly for targeting you
+    '''
+    try:
+        _criterias = data.topXAdTargetCriteriasUsed(x)
+
+        _x = [i[1] for i in _criterias]
+        _y = [i[0] for i in _criterias]
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(16, 9), dpi=200)
+
+            sns.barplot(x=_x, y=_y,
+                        ax=fig.gca(),
+                        palette='RdPu',
+                        orient='h')
+
+            fig.gca().set_title(title, fontsize=20, pad=16)
+            fig.tight_layout()
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
