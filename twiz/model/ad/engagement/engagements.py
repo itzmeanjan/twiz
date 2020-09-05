@@ -169,6 +169,20 @@ class Engagements:
                                    advertiser),
                                {}).items()))
 
+    def usageCountByAdTargetCriteriaValue(self) -> Counter:
+        '''
+            Counting number of occurance of ad target criteria values
+        '''
+        return Counter(chain.from_iterable(
+            map(lambda e: map(lambda _e: _e.value,
+                              e.criterias), self.all)))
+
+    def topXAdTargetCriteriasUsed(self, x: int) -> List[Dict[str, int]]:
+        '''
+            Finding top X ad target criteria values
+        '''
+        return self.usageCountByAdTargetCriteriaValue().most_common(x)
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
