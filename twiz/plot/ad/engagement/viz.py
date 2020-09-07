@@ -317,7 +317,7 @@ def _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data: Engagements)
         tuple of ad target criteria type & respective X, Y -axis value to be plotted.
     '''
     def _extractXAndY(v: Counter) -> Tuple[List[str], List[str]]:
-        _x = v.keys()
+        _x = list(v.keys())
         _y = [v[i] for i in _x]
 
         return _x, _y
