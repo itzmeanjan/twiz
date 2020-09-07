@@ -317,7 +317,7 @@ def _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data: Engagements)
         tuple of ad target criteria type & respective X, Y -axis value to be plotted.
     '''
     def _extractXAndY(v: Counter) -> Tuple[List[str], List[str]]:
-        _x = list(v.keys())
+        _x = list(v.keys())[:30]
         _y = [v[i] for i in _x]
 
         return _x, _y
@@ -333,7 +333,7 @@ def plotBarChartShowingAdTargetCriteriaUsageCountGroupedByType(data: Engagements
     '''
     def _plot(title: str, sink: str, _x: List[str], _y: List[str]):
         with plt.style.context('dark_background'):
-            fig = plt.Figure(figsize=(16, 9), dpi=200)
+            fig = plt.Figure(figsize=(24, 12), dpi=240)
 
             sns.barplot(x=_y, y=_x,
                         ax=fig.gca(),
