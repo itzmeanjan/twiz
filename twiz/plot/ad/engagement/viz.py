@@ -329,7 +329,7 @@ def _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data: Engagements)
 def plotBarChartShowingAdTargetCriteriaUsageCountGroupedByType(data: Engagements, name: str):
     '''
         Plotting Twitter Ad target criterias used under each category 
-        i.e. {Locations, Age, Follower look-alikes, Age, ...}, as bar plot
+        i.e. {Locations, Age, Follower look-alikes, Platforms, ...}, as bar plot
     '''
     def _plot(title: str, sink: str, _x: List[str], _y: List[str]):
         with plt.style.context('dark_background'):
@@ -348,7 +348,7 @@ def plotBarChartShowingAdTargetCriteriaUsageCountGroupedByType(data: Engagements
 
     try:
         for i in _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data):
-            _plot('`{}` used as Ad Target Criterias on Twitter, for {}'.format(i[0], name),
+            _plot('`{}` used as Twitter Ad Target Criteria, for {}'.format(i[0], name),
                   'plots/twitterAdTargetCriteriasUsedIn{}For{}.png'.format(
                       _joinName(i[0]), _joinName(name)),
                   *i[1:])
