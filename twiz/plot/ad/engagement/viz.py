@@ -348,7 +348,7 @@ def plotBarChartShowingAdTargetCriteriaUsageCountGroupedByType(data: Engagements
 
     try:
         for i in _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data):
-            _plot('`{}` used as Twitter Ad Target Criteria, for {}'.format(i[0], name),
+            _plot('Using `{}` as Twitter Ad Target Criteria, for {}'.format(i[0], name),
                   'plots/twitterAdTargetCriteriasUsedIn{}For{}.png'.format(
                       _joinName(i[0]), _joinName(name)),
                   *i[1:])
