@@ -36,4 +36,4 @@ Here're some example plots from some ad target criterias.
 
 ![twitterAdTargetCriteriasUsedInFollower_look-alikesForAnjan_Roy](../plots/twitterAdTargetCriteriasUsedInFollower_look-alikesForAnjan_Roy.png)
 
-More can be found [here](https://github.com/itzmeanjan/twiz/plots)
+More can be found [here](https://github.com/itzmeanjan/twiz/tree/master/plots)
