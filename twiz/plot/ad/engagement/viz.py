@@ -322,8 +322,40 @@ def _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data: Engagements)
 
         return _x, _y
 
-    return map(lambda e: (e[0], _extractXAndY(e[1])),
-        data.adTargetCriteriaUsageCountGroupedByType().items())
+    return map(lambda e: (e[0], *_extractXAndY(e[1])),
+               data.adTargetCriteriaUsageCountGroupedByType().items())
+
+
+def plotBarChartShowingAdTargetCriteriaUsageCountGroupedByType(data: Engagements, name: str):
+    '''
+        Plotting Twitter Ad target criterias used under each category 
+        i.e. {Locations, Age, Follower look-alikes, Age, ...}, as bar plot
+    '''
+    def _plot(title: str, sink: str, _x: List[str], _y: List[str]):
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(16, 9), dpi=200)
+
+            sns.barplot(x=_y, y=_x,
+                        ax=fig.gca(),
+                        palette='plasma',
+                        orient='h')
+
+            fig.gca().set_title(title, fontsize=18, pad=10)
+            fig.tight_layout()
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+    try:
+        for i in _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data):
+            _plot('`{}` -based Ad Target Criterias used on Twitter, for {}'.format(i[0], name),
+                  'twitterAdTargetCriteriasUsedIn{}For{}.png'.format(
+                      _joinName(i[0]), _joinName(name)),
+                  *i[1:])
+
+        return True
+    except Exception:
+        return False
 
 
 if __name__ == '__main__':
