@@ -51,5 +51,6 @@ twiz path-to-twitter-data.zip sink/
         - [x] [Top 15 Twitter Advertisers with respective Engagement Types for YOU](./docs/twitterAdsCountGroupedByAdvertiserNamesAndEngagementTypesForYOU.md)
         - [x] [Twitter Ad targeting criterias used by top X advertisers for YOU](./docs/twitterAdTargetingCriteriasUsedForYOUByTopAdvertisers.md)
         - [x] [Top X Advertisement Target Criterias used for YOU on Twitter](./docs/top20AdTargetCriteriasUsedForYOUOnTwitter.md)
+        - [x] [{Locations, Age, Follower look-alikes, Platforms, ...} -used as Twitter Ad Target Criterias](./docs/groupedTwitterAdTargetCriteriasUsedForYOU.md)
 
 **This section will keep getting populated ;)**

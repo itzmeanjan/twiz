@@ -6,6 +6,7 @@ from typing import List, Tuple
 from twiz.model.ad.engagement.engagements import Engagements
 from functools import reduce
 from itertools import chain
+from collections import Counter
 
 
 def plotAdTargetDeviceTypes(data: Engagements, title: str, sink: str) -> bool:
@@ -303,6 +304,54 @@ def plotTopXTargetCriteriasUsedByTwitterAdvertisers(data: Engagements, x: int, t
 
             fig.savefig(sink, pad_inches=.8)
             plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
+def _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data: Engagements) -> map:
+    '''
+        Splitting ad target criteria usage count into X -axis data & Y -axis data,
+        then creating a map _( lazy evaluation )_, where each element is a
+        tuple of ad target criteria type & respective X, Y -axis value to be plotted.
+    '''
+    def _extractXAndY(v: Counter) -> Tuple[List[str], List[str]]:
+        _x = list(v.keys())[:30]
+        _y = [v[i] for i in _x]
+
+        return _x, _y
+
+    return map(lambda e: (e[0], *_extractXAndY(e[1])),
+               data.adTargetCriteriaUsageCountGroupedByType().items())
+
+
+def plotBarChartShowingAdTargetCriteriaUsageCountGroupedByType(data: Engagements, name: str):
+    '''
+        Plotting Twitter Ad target criterias used under each category 
+        i.e. {Locations, Age, Follower look-alikes, Platforms, ...}, as bar plot
+    '''
+    def _plot(title: str, sink: str, _x: List[str], _y: List[str]):
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(24, 12), dpi=240)
+
+            sns.barplot(x=_y, y=_x,
+                        ax=fig.gca(),
+                        palette='plasma',
+                        orient='h')
+
+            fig.gca().set_title(title, fontsize=18, pad=10)
+            fig.tight_layout()
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+    try:
+        for i in _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data):
+            _plot('Using `{}` as Twitter Ad Target Criteria, for {}'.format(i[0], name),
+                  'plots/twitterAdTargetCriteriasUsedIn{}For{}.png'.format(
+                      _joinName(i[0]), _joinName(name)),
+                  *i[1:])
 
         return True
     except Exception:
