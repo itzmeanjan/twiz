@@ -196,8 +196,8 @@ class Engagements:
 
         return dict(map(lambda e: (e[0], Counter(e[1])),
                         reduce(_groupBy,
-                               map(lambda e: map(lambda _e: (_e.type, _e.value),
-                                                 e.criterias), self.all), {}).items()))
+                               chain.from_iterable(map(lambda e: map(lambda _e: (_e.type, _e.value),
+                                                                     e.criterias), self.all)), {}).items()))
 
 
 if __name__ == '__main__':
