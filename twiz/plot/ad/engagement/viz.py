@@ -6,6 +6,7 @@ from typing import List, Tuple
 from twiz.model.ad.engagement.engagements import Engagements
 from functools import reduce
 from itertools import chain
+from collections import Counter
 
 
 def plotAdTargetDeviceTypes(data: Engagements, title: str, sink: str) -> bool:
@@ -307,6 +308,22 @@ def plotTopXTargetCriteriasUsedByTwitterAdvertisers(data: Engagements, x: int, t
         return True
     except Exception:
         return False
+
+
+def _prepareDataForPlottingAdTargetCriteriaUsageGroupedByType(data: Engagements) -> map:
+    '''
+        Splitting ad target criteria usage count into X -axis data & Y -axis data,
+        then creating a map _( lazy evaluation )_, where each element is a
+        tuple of ad target criteria type & respective X, Y -axis value to be plotted.
+    '''
+    def _extractXAndY(v: Counter) -> Tuple[List[str], List[str]]:
+        _x = v.keys()
+        _y = [v[i] for i in _x]
+
+        return _x, _y
+
+    return map(lambda e: (e[0], _extractXAndY(e[1])),
+        data.adTargetCriteriaUsageCountGroupedByType().items())
 
 
 if __name__ == '__main__':

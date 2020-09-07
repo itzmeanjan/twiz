@@ -183,10 +183,10 @@ class Engagements:
         '''
         return self.usageCountByAdTargetCriteriaValue().most_common(x)
 
-    def adTargetCriteriaUsageCountGroupedByType(self):
+    def adTargetCriteriaUsageCountGroupedByType(self) -> Dict[str, Counter]:
         '''
-            Grouping ad count by targeting criteria type & under each type holding
-            the usage count of each target value
+            Grouping ad target criteria usage count by targeting criteria type 
+            & under each type, holding the usage count of each target value
         '''
         def _groupBy(acc: Dict[str, List[str]], cur: Tuple[str, str]) -> Dict[str, List[str]]:
             if cur[0] in acc:
