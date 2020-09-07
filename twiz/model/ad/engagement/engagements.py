@@ -194,6 +194,8 @@ class Engagements:
             else:
                 acc[cur[0]] = [cur[1]]
 
+            return acc
+
         return dict(map(lambda e: (e[0], Counter(e[1])),
                         reduce(_groupBy,
                                chain.from_iterable(map(lambda e: map(lambda _e: (_e.type, _e.value),
