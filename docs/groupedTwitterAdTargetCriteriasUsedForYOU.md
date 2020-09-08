@@ -2,7 +2,7 @@
 
 ## intro
 
-Here's we're going to first find out all those possible ad target categories, used for targeting ads. Then for each of them, we'll find out figure out top 30 most used target values used, which are to be plotted as horizontal bar plot.
+Here's we're going to first find out all those possible ad target categories, used for targeting ads. Then for each of them, we'll figure out top 30 most used target values, which are to be plotted as horizontal bar plot.
 
 ## example
 
