@@ -358,5 +358,35 @@ def plotBarChartShowingAdTargetCriteriaUsageCountGroupedByType(data: Engagements
         return False
 
 
+def plotTopXHashTagsInPromotedTweets(data: Engagements, x: int, title: str, sink: str) -> bool:
+    '''
+        Plotting most common X number hash tags found in promoted tweets,
+        as horizontal bar plot
+    '''
+    try:
+        _hashtags = data.topXHashTagsUsedInPromotedTweets(x)
+
+        _x = [i[0] for i in _hashtags]
+        _y = [i[1] for i in _hashtags]
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(16, 9), dpi=200)
+
+            sns.barplot(x=_y, y=_x,
+                        ax=fig.gca(),
+                        palette='viridis',
+                        orient='h')
+
+            fig.gca().set_title(title, fontsize=18, pad=10)
+            fig.tight_layout()
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')

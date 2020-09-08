@@ -201,6 +201,22 @@ class Engagements:
                                chain.from_iterable(map(lambda e: map(lambda _e: (_e.type, _e.value),
                                                                      e.criterias), self.all)), {}).items()))
 
+    def hashTagCountInPromotedTweets(self) -> Counter:
+        '''
+            Finds all hashtags used in all promoted tweets you got engaged in,
+            with their respective count of usage
+        '''
+        return Counter(chain.from_iterable(
+            map(lambda e: e.extractHashTags(),
+                filter(lambda e: not e.isEmpty,
+                       map(lambda e: e.tweet, self.all)))))
+
+    def topXHashTagsUsedInPromotedTweets(self, x: int) -> List[Tuple[str, int]]:
+        '''
+            Returns a list of most common X hash tags found in promoted tweets
+        '''
+        return self.hashTagCountInPromotedTweets().most_common(x)
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')

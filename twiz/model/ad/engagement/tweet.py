@@ -23,6 +23,13 @@ class Tweet:
     def extractHashTags(self) -> List[str]:
         return self._hashTagRegex().findall(self.text)
 
+    @property
+    def isEmpty(self) -> bool:
+        '''
+            Checks whether promoted tweet info is present or not
+        '''
+        return self.text is None
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
