@@ -417,8 +417,6 @@ def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: 
     try:
         _x, _y, _labels, _hues = _prepareData()
 
-        print(_labels)
-
         with plt.style.context('dark_background'):
             fig = plt.Figure(figsize=(20, 12), dpi=200)
 
@@ -435,8 +433,8 @@ def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: 
                                _splittedAndZipped[i],
                                ha='center',
                                rotation=0,
-                               fontsize=10,
-                               color='white')
+                               fontsize=9,
+                               color='black')
 
             fig.gca().set_title(title, fontsize=18, pad=10)
             fig.tight_layout(pad=4)
