@@ -388,7 +388,7 @@ def plotTopXHashTagsInPromotedTweets(data: Engagements, x: int, title: str, sink
         return False
 
 
-def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: int, y: int):
+def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: int, y: int, title: str, sink: str) -> bool:
     def _prepareData() -> Tuple[List[str], List[int], List[str], List[str]]:
         def _handleAbsenceOfXHashTags(_tmp: List[List[Any]], _v: Any) -> List[List[Any]]:
             return reduce(lambda acc, cur: acc +
@@ -410,7 +410,25 @@ def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: 
 
         return _x, _y, _labels, _hues
 
-    return _prepareData()
+    try:
+        _x, _y, _labels, _hue = _prepareData()
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(16, 9), dpi=200)
+
+            sns.barplot(x=_x, y=_y, hue=_hue,
+                        ax=fig.gca(),
+                        palette='Blues_d')
+
+            fig.gca().set_title(title, fontsize=18, pad=10)
+            fig.tight_layout(pad=4)
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
 
 
 if __name__ == '__main__':
