@@ -406,19 +406,31 @@ def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: 
             _handleAbsenceOfXHashTags(
                 [[j[0] for j in i[1]] for i in _hashTags], '')))
 
-        _hues = list(chain.from_iterable([f'{i+1}' for i in range(x)] * y))
+        _hues = [f'#HashTag : {i+1}' for i in range(x)] * y
 
         return _x, _y, _labels, _hues
 
     try:
-        _x, _y, _labels, _hue = _prepareData()
+        _x, _y, _labels, _hues = _prepareData()
+
+        print(_x, _y, _labels, _hues)
 
         with plt.style.context('dark_background'):
             fig = plt.Figure(figsize=(16, 9), dpi=200)
 
-            sns.barplot(x=_x, y=_y, hue=_hue,
+            sns.barplot(x=_y, y=_x, hue=_hues,
                         ax=fig.gca(),
-                        palette='Blues_d')
+                        palette='Blues_d',
+                        orient='h')
+
+            for i, j in enumerate(fig.gca().patches):
+                fig.gca().text(j.get_x() + j.get_width() * .5,
+                               j.get_y() + j.get_height() * .5,
+                               _labels[i],
+                               ha='center',
+                               rotation=0,
+                               fontsize=10,
+                               color='white')
 
             fig.gca().set_title(title, fontsize=18, pad=10)
             fig.tight_layout(pad=4)
@@ -427,7 +439,8 @@ def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: 
             plt.close(fig)
 
         return True
-    except Exception:
+    except Exception as e:
+        print(e)
         return False
 
 
