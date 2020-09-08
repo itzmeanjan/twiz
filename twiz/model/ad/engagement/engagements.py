@@ -223,6 +223,9 @@ class Engagements:
             and keeping count of each hashtag's occurance
         '''
         def _groupBy(acc: Dict[str, List[List[str]]], cur: Tuple[str, List[str]]) -> Dict[str, List[List[str]]]:
+            if not cur[1]:
+                return acc
+
             if cur[0] in acc:
                 acc[cur[0]].append(cur[1])
             else:
