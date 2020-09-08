@@ -211,6 +211,12 @@ class Engagements:
                 filter(lambda e: not e.isEmpty,
                        map(lambda e: e.tweet, self.all)))))
 
+    def topXHashTagsUsedInPromotedTweets(self, x: int) -> List[Tuple[str, int]]:
+        '''
+            Returns a list of most common X hash tags found in promoted tweets
+        '''
+        return self.hashTagCountInPromotedTweets().most_common(x)
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')
