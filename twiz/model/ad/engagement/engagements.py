@@ -241,17 +241,17 @@ class Engagements:
                               map(lambda e: (e.advertiser.fullName, e.tweet),
                                   self.all))), {}).items()))
 
-    def topXHashTagsUsedByTopYAdvertisersInPromotedTweets(self, x: int, y: int):
+    def topXHashTagsUsedByTopYAdvertisersInPromotedTweets(self, x: int, y: int) -> map:
         '''
             Finding top X used hash tags in promoted tweets by top Y advertisers 
             ( where top Y determined number of tweets they promoted )
         '''
         _hashtags = self.hashTagCountInPromotedTweetsGroupedByAdvertisers()
 
-        return dict(map(lambda e: (e, _hashtags[e].most_common(x)),
-                        sorted(_hashtags,
-                               key=lambda e: sum(_hashtags[e].values()),
-                               reverse=True)[:y]))
+        return map(lambda e: (e, _hashtags[e].most_common(x)),
+                   sorted(_hashtags,
+                          key=lambda e: sum(_hashtags[e].values()),
+                          reverse=True)[:y])
 
 
 if __name__ == '__main__':

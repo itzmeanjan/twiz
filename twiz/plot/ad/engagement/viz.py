@@ -2,7 +2,7 @@
 
 import seaborn as sns
 from matplotlib import pyplot as plt
-from typing import List, Tuple
+from typing import List, Tuple, Any
 from twiz.model.ad.engagement.engagements import Engagements
 from functools import reduce
 from itertools import chain
@@ -386,6 +386,31 @@ def plotTopXHashTagsInPromotedTweets(data: Engagements, x: int, title: str, sink
         return True
     except Exception:
         return False
+
+
+def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: int, y: int):
+    def _prepareData() -> Tuple[List[str], List[int], List[str], List[str]]:
+        def _handleAbsenceOfXHashTags(_tmp: List[List[Any]], _v: Any) -> List[List[Any]]:
+            return reduce(lambda acc, cur: acc +
+                          [cur + [_v] * (x - len(cur))], _tmp, [])
+
+        _hashTags = list(
+            data.topXHashTagsUsedByTopYAdvertisersInPromotedTweets(x, y))
+
+        _x = list(chain.from_iterable([[i[0]] * x for i in _hashTags]))
+
+        _y = list(chain.from_iterable(
+            _handleAbsenceOfXHashTags(
+                [[j[1] for j in i[1]] for i in _hashTags], 0)))
+        _labels = list(chain.from_iterable(
+            _handleAbsenceOfXHashTags(
+                [[j[0] for j in i[1]] for i in _hashTags], '')))
+
+        _hues = list(chain.from_iterable([f'{i+1}' for i in range(x)] * y))
+
+        return _x, _y, _labels, _hues
+
+    return _prepareData()
 
 
 if __name__ == '__main__':
