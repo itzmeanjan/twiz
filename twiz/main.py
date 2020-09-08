@@ -27,7 +27,8 @@ from .plot.ad.engagement.viz import (
     plotTargetCriteriasForTopXAdvertisers,
     plotTopXTargetCriteriasUsedByTwitterAdvertisers,
     plotBarChartShowingAdTargetCriteriaUsageCountGroupedByType,
-    plotTopXHashTagsInPromotedTweets
+    plotTopXHashTagsInPromotedTweets,
+    plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets
 )
 from time import time
 
@@ -180,7 +181,11 @@ def main():
                 _engagements,
                 20,
                 f'Top 20 #HashTags in Promoted Tweets targeting {_accountDisplayName}',
-                f'plots/top20HashTagsInPromotedTweetsFor{_joinName(_accountDisplayName)}.png')
+                f'plots/top20HashTagsInPromotedTweetsFor{_joinName(_accountDisplayName)}.png'),
+            plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(
+                _engagements, 3, 10,
+                f'Top 3 #HashTags in Tweets promoted by top 10 Advertisers',
+                f'plots/top3HashTagsInPromotedTweetsFromTop10AdvertisersFor{_joinName(_accountDisplayName)}.png')
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
