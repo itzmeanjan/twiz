@@ -410,23 +410,29 @@ def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: 
 
         return _x, _y, _labels, _hues
 
+    def _splitAndZip(_tmp: List[str]):
+        return list(chain.from_iterable(
+            zip(*[_tmp[i:i+x] for i in range(0, len(_tmp), x)])))
+
     try:
         _x, _y, _labels, _hues = _prepareData()
 
-        print(_x, _y, _labels, _hues)
+        print(_labels)
 
         with plt.style.context('dark_background'):
-            fig = plt.Figure(figsize=(16, 9), dpi=200)
+            fig = plt.Figure(figsize=(20, 12), dpi=200)
 
             sns.barplot(x=_y, y=_x, hue=_hues,
                         ax=fig.gca(),
                         palette='Blues_d',
                         orient='h')
 
+            _splittedAndZipped = _splitAndZip(_labels)
+
             for i, j in enumerate(fig.gca().patches):
                 fig.gca().text(j.get_x() + j.get_width() * .5,
                                j.get_y() + j.get_height() * .5,
-                               _labels[i],
+                               _splittedAndZipped[i],
                                ha='center',
                                rotation=0,
                                fontsize=10,
