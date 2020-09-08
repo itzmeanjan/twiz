@@ -389,8 +389,19 @@ def plotTopXHashTagsInPromotedTweets(data: Engagements, x: int, title: str, sink
 
 
 def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: int, y: int, title: str, sink: str) -> bool:
+    '''
+        Plotting grouped bar chart depicting top X hash tags used by top Y advertiser's
+        promoted tweets.
+    '''
     def _prepareData() -> Tuple[List[str], List[int], List[str], List[str]]:
+        '''
+            Prepare data for plotting grouped bar chart
+        '''
         def _handleAbsenceOfXHashTags(_tmp: List[List[Any]], _v: Any) -> List[List[Any]]:
+            '''
+                If some advertisers are not having X elements, then we're going to
+                fill empty spaces i.e. X - len(cur_element_set), with default value `_v`
+            '''
             return reduce(lambda acc, cur: acc +
                           [cur + [_v] * (x - len(cur))], _tmp, [])
 
@@ -411,6 +422,15 @@ def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: 
         return _x, _y, _labels, _hues
 
     def _splitAndZip(_tmp: List[str]):
+        '''
+            Split an iterator into collection of X -sized subsets, then zip them,
+            such that following happens.
+
+            _l = [1, 2, 3, 4, 5, 6]
+            _splitted = [[1, 2, 3], [4, 5, 6]] ( into 3 -sized subsets )
+            _zipped = [(1, 4), (2, 5), (3, 6)]
+            _joined = [1, 4, 2, 5, 3, 6] -> this is to be used as label names
+        '''
         return list(chain.from_iterable(
             zip(*[_tmp[i:i+x] for i in range(0, len(_tmp), x)])))
 
@@ -443,8 +463,7 @@ def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: 
             plt.close(fig)
 
         return True
-    except Exception as e:
-        print(e)
+    except Exception:
         return False
 
 
