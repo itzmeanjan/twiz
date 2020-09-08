@@ -26,9 +26,9 @@ class Tweet:
     @property
     def isEmpty(self) -> bool:
         '''
-            Checks whether promoted tweet is present or not
+            Checks whether promoted tweet info is present or not
         '''
-        return self.id is None and self.text is None
+        return self.text is None
 
 
 if __name__ == '__main__':
