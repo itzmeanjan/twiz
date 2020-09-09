@@ -217,6 +217,42 @@ class Engagements:
         '''
         return self.hashTagCountInPromotedTweets().most_common(x)
 
+    def hashTagCountInPromotedTweetsGroupedByAdvertisers(self) -> Dict[str, Counter]:
+        '''
+            Grouping all hashtags found in promoted tweets by their respective advertiser name
+            and keeping count of each hashtag's occurance
+        '''
+        def _groupBy(acc: Dict[str, List[List[str]]], cur: Tuple[str, List[str]]) -> Dict[str, List[List[str]]]:
+            if not cur[1]:
+                return acc
+
+            if cur[0] in acc:
+                acc[cur[0]].append(cur[1])
+            else:
+                acc[cur[0]] = [cur[1]]
+
+            return acc
+
+        return dict(map(
+            lambda e: (e[0], Counter(chain.from_iterable(e[1]))),
+            reduce(_groupBy,
+                   map(lambda e: (e[0], e[1].extractHashTags()),
+                       filter(lambda e: not e[1].isEmpty,
+                              map(lambda e: (e.advertiser.fullName, e.tweet),
+                                  self.all))), {}).items()))
+
+    def topXHashTagsUsedByTopYAdvertisersInPromotedTweets(self, x: int, y: int) -> map:
+        '''
+            Finding top X used hash tags in promoted tweets by top Y advertisers 
+            ( where top Y determined number of tweets they promoted )
+        '''
+        _hashtags = self.hashTagCountInPromotedTweetsGroupedByAdvertisers()
+
+        return map(lambda e: (e, _hashtags[e].most_common(x)),
+                   sorted(_hashtags,
+                          key=lambda e: sum(_hashtags[e].values()),
+                          reverse=True)[:y])
+
 
 if __name__ == '__main__':
     print('It\'s not supposed to be used this way !')

@@ -2,7 +2,7 @@
 
 import seaborn as sns
 from matplotlib import pyplot as plt
-from typing import List, Tuple
+from typing import List, Tuple, Any
 from twiz.model.ad.engagement.engagements import Engagements
 from functools import reduce
 from itertools import chain
@@ -379,6 +379,85 @@ def plotTopXHashTagsInPromotedTweets(data: Engagements, x: int, title: str, sink
 
             fig.gca().set_title(title, fontsize=18, pad=10)
             fig.tight_layout()
+
+            fig.savefig(sink, pad_inches=.8)
+            plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
+def plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets(data: Engagements, x: int, y: int, title: str, sink: str) -> bool:
+    '''
+        Plotting grouped bar chart depicting top X hash tags used by top Y advertiser's
+        promoted tweets.
+    '''
+    def _prepareData() -> Tuple[List[str], List[int], List[str], List[str]]:
+        '''
+            Prepare data for plotting grouped bar chart
+        '''
+        def _handleAbsenceOfXHashTags(_tmp: List[List[Any]], _v: Any) -> List[List[Any]]:
+            '''
+                If some advertisers are not having X elements, then we're going to
+                fill empty spaces i.e. X - len(cur_element_set), with default value `_v`
+            '''
+            return reduce(lambda acc, cur: acc +
+                          [cur + [_v] * (x - len(cur))], _tmp, [])
+
+        _hashTags = list(
+            data.topXHashTagsUsedByTopYAdvertisersInPromotedTweets(x, y))
+
+        _x = list(chain.from_iterable([[i[0]] * x for i in _hashTags]))
+
+        _y = list(chain.from_iterable(
+            _handleAbsenceOfXHashTags(
+                [[j[1] for j in i[1]] for i in _hashTags], 0)))
+        _labels = list(chain.from_iterable(
+            _handleAbsenceOfXHashTags(
+                [[j[0] for j in i[1]] for i in _hashTags], '')))
+
+        _hues = [f'#HashTag : {i+1}' for i in range(x)] * y
+
+        return _x, _y, _labels, _hues
+
+    def _splitAndZip(_tmp: List[str]):
+        '''
+            Split an iterator into collection of X -sized subsets, then zip them,
+            such that following happens.
+
+            _l = [1, 2, 3, 4, 5, 6]
+            _splitted = [[1, 2, 3], [4, 5, 6]] ( into 3 -sized subsets )
+            _zipped = [(1, 4), (2, 5), (3, 6)]
+            _joined = [1, 4, 2, 5, 3, 6] -> this is to be used as label names
+        '''
+        return list(chain.from_iterable(
+            zip(*[_tmp[i:i+x] for i in range(0, len(_tmp), x)])))
+
+    try:
+        _x, _y, _labels, _hues = _prepareData()
+
+        with plt.style.context('dark_background'):
+            fig = plt.Figure(figsize=(20, 12), dpi=200)
+
+            sns.barplot(x=_y, y=_x, hue=_hues,
+                        ax=fig.gca(),
+                        palette='Blues_d',
+                        orient='h')
+
+            _splittedAndZipped = _splitAndZip(_labels)
+
+            for i, j in enumerate(fig.gca().patches):
+                fig.gca().text(j.get_x() + j.get_width() * .5,
+                               j.get_y() + j.get_height() * .5,
+                               _splittedAndZipped[i],
+                               ha='center',
+                               rotation=0,
+                               fontsize=9,
+                               color='black')
+
+            fig.gca().set_title(title, fontsize=18, pad=10)
+            fig.tight_layout(pad=4)
 
             fig.savefig(sink, pad_inches=.8)
             plt.close(fig)
