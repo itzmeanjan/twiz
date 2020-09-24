@@ -252,6 +252,12 @@ class Engagements:
                    sorted(_hashtags,
                           key=lambda e: sum(_hashtags[e].values()),
                           reverse=True)[:y])
+    
+    def taggedAccountCountInPromotedTweets(self) -> Counter:
+        return Counter(chain.from_iterable(
+            map(lambda e: e.extractTags(),
+                filter(lambda e: not e.isEmpty,
+                       map(lambda e: e.tweet, self.all)))))
 
 
 if __name__ == '__main__':
