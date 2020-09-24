@@ -4,7 +4,14 @@
 
 Your Twitter Account Data Analysis &amp; Visualization Tool &lt;3
 
-## motivation
+## Table of Contents
+
+- [Why did you create this project ?](#motivation)
+- [Where did you get all these data ?](#data)
+- [How do I use it ?](#usage)
+- [What's inside box ?](#features)
+
+## Motivation
 
 Being a data hunter ( yeah, you read it correct ), I love to collect data & analyze it for finding hidden patterns in it.
 
@@ -12,11 +19,11 @@ That's why I downloaded my Twitter account data archive & started analyzing it. 
 
 I'm adding some features here, if you feel some improvements can be done there, please feel free to contact me or you can always raise a PR.
 
-## data
+## Data
 
 For obtaining your copy of Twitter account data archive, follow [this](https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive).
 
-## usage
+## Usage
 
 **twiz** can be downloaded from PyPI. Make sure you've python _( >=3.7 )_ installed.
 
@@ -30,7 +37,7 @@ If you've added default _pip_ installation path to system **PATH** variable, the
 twiz path-to-twitter-data.zip sink/
 ```
 
-## features
+## Features
 
 - Followers & Followings
     - [x] [Twitter Followers And Followings Per Cent](./docs/twitterFollowersAndFollowingsForYOU.md)
