@@ -252,7 +252,7 @@ class Engagements:
                    sorted(_hashtags,
                           key=lambda e: sum(_hashtags[e].values()),
                           reverse=True)[:y])
-    
+
     def taggedAccountCountInPromotedTweets(self) -> Counter:
         '''
             Extracts out all tagged twitter user names found in
@@ -262,6 +262,12 @@ class Engagements:
             map(lambda e: e.extractTags(),
                 filter(lambda e: not e.isEmpty,
                        map(lambda e: e.tweet, self.all)))))
+
+    def topXTaggedAccountsInPromotedTweets(self, x: int) -> List[Tuple[str, int]]:
+        '''
+            Given x > 0, it'll find out top X most tagged twitter user names, found in promoted tweets 
+        '''
+        return self.taggedAccountCountInPromotedTweets().most_common(x)
 
 
 if __name__ == '__main__':
