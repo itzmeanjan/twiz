@@ -1,13 +1,14 @@
 # twiz
 
-![banner](./banner/banner.png)
-
 Your Twitter Account Data Analysis &amp; Visualization Tool &lt;3
+
+![banner](./banner/banner.png)
 
 ## Table of Contents
 
 - [Why did you create this project ?](#motivation)
 - [Where did you get all these data ?](#data)
+- [How do I install it ?](#installation)
 - [How do I use it ?](#usage)
 - [What's inside box ?](#features)
 
@@ -23,7 +24,7 @@ I'm adding some features here, if you feel some improvements can be done there, 
 
 For obtaining your copy of Twitter account data archive, follow [this](https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive).
 
-## Usage
+## Installation
 
 **twiz** can be downloaded from PyPI. Make sure you've python _( >=3.7 )_ installed.
 
@@ -31,9 +32,11 @@ For obtaining your copy of Twitter account data archive, follow [this](https://h
 python3 -m pip install -U twiz
 ```
 
+## Usage
+
 If you've added default _pip_ installation path to system **PATH** variable, then it can be invoked as below.
 
-```
+```bash
 twiz path-to-twitter-data.zip sink/
 ```
 
