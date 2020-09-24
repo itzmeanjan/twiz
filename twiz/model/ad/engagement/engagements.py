@@ -254,6 +254,10 @@ class Engagements:
                           reverse=True)[:y])
     
     def taggedAccountCountInPromotedTweets(self) -> Counter:
+        '''
+            Extracts out all tagged twitter user names found in
+            promoted tweets, along with their respective occurance count
+        '''
         return Counter(chain.from_iterable(
             map(lambda e: e.extractTags(),
                 filter(lambda e: not e.isEmpty,
