@@ -26,6 +26,9 @@ class Tweet:
 
     @staticmethod
     def build(data: Dict[str, Any]) -> Tweet:
+        if not data:
+            return None
+
         tweet = Tweet()
 
         tweet.retweeted = data.get('retweeted', False)
@@ -46,3 +49,7 @@ class Tweet:
             'expanded_url')), data.get('entities', {}).get('urls', [])))
 
         return tweet
+
+
+if __name__ == '__main__':
+    print('[!] This is not an executable script')
