@@ -64,6 +64,9 @@ twiz path-to-twitter-data.zip sink/
         - [x] [{Locations, Age, Follower look-alikes, Platforms, ...} -used as Twitter Ad Target Criterias](./docs/groupedTwitterAdTargetCriteriasUsedForYOU.md)
         - [x] [Top 20 Twitter **#HashTags** found in Promoted Tweets for YOU](./docs/top20HashTagsInPromotedTweetsForYOU.md)
         - [x] [Top 3 **#HashTags** in tweets promoted by top 10 advertisers, targeting YOU](./docs/top3HashTagsInPromotedTweetsFromTop10AdvertisersForYOU.md)
-        - [Top X **@taggedUsers** in promoted tweets targeting YOU](./docs/top20TaggedUsersInPromotedTweetsForYOU.md)
+        - [x] [Top X **@taggedUsers** in promoted tweets targeting YOU](./docs/top20TaggedUsersInPromotedTweetsForYOU.md)
+
+- Tweets
+    - [x] [Top X **#HashTags** in tweets by YOU](./docs/top20HashTagsInTweetsByYOU.md)
 
 **This section will keep getting populated ;)**
