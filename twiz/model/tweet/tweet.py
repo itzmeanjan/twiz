@@ -33,7 +33,7 @@ class Tweet:
 
         tweet.retweeted = data.get('retweeted', False)
         tweet.retweetCount = int(data.get('retweet_count', 0))
-        tweet.favourited = data.get('favorited', False)
+        tweet.favorited = data.get('favorited', False)
         tweet.favoriteCount = int(data.get('favorite_count', 0))
         tweet.id = data.get('id')
         tweet.possiblySensitive = data.get('possibly_sensitive', False)
@@ -42,7 +42,7 @@ class Tweet:
         tweet.text = data.get('full_text')
 
         tweet.hashtags = tuple(
-            map(lambda e: e.text, data.get('entities', {}).get('hashtags', [])))
+            map(lambda e: e.get('text'), data.get('entities', {}).get('hashtags', [])))
         tweet.mentions = tuple(map(lambda e: Mention(e.get('name'), e.get(
             'screen_name'), e.get('id')), data.get('entities', {}).get('user_mentions', [])))
         tweet.urls = tuple(map(lambda e: URL(e.get('url'), e.get(

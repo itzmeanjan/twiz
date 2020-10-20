@@ -5,6 +5,9 @@ from __future__ import annotations
 from typing import List, Dict, Any
 from .tweet import Tweet
 
+from itertools import chain
+from collections import Counter
+
 
 class Tweets:
     def __init__(self, _all: List[Tweet]):
@@ -18,6 +21,12 @@ class Tweets:
             lambda e: Tweet.build(e.get('tweet', {})), data)))
 
         return tweets
+
+    def hashTagToCount(self) -> Counter:
+        '''
+            Returns all hash tags and their respective occurance count
+        '''
+        return Counter(chain.from_iterable(map(lambda e: e.hashtags, self.app)))
 
 
 if __name__ == '__main__':
