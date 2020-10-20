@@ -26,7 +26,7 @@ class Tweets:
         '''
             Returns all hash tags and their respective occurance count
         '''
-        return Counter(chain.from_iterable(map(lambda e: e.hashtags, self.app)))
+        return Counter(chain.from_iterable(map(lambda e: e.hashtags, self.all)))
 
     def topXHashTagsWithCount(self, x: int) -> List[Tuple[str, int]]:
         return self.hashTagToCount().most_common(x)

@@ -66,4 +66,7 @@ twiz path-to-twitter-data.zip sink/
         - [x] [Top 3 **#HashTags** in tweets promoted by top 10 advertisers, targeting YOU](./docs/top3HashTagsInPromotedTweetsFromTop10AdvertisersForYOU.md)
         - [x] [Top X **@taggedUsers** in promoted tweets targeting YOU](./docs/top20TaggedUsersInPromotedTweetsForYOU.md)
 
+- Tweets
+    - [x] [Top X **#HashTags** in tweets by YOU](./docs/top20HashTagsInTweetsByYOU.md)
+
 **This section will keep getting populated ;)**

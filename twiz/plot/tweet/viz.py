@@ -14,7 +14,7 @@ def plotTopXHashTags(data: Tweets, x: int, title: str, sink: str):
         fig = plt.Figure(figsize=(16, 9), dpi=100)
         sns.set_style('darkgrid')
 
-        sns.barplot(x=x, y=y, ax=fig.gca(), orient='h', palette='plasma')
+        sns.barplot(x=y, y=x, ax=fig.gca(), orient='h', palette='plasma')
 
         fig.gca().set_title(title, fontsize=20, pad=10)
         fig.tight_layout(pad=4)
