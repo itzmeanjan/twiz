@@ -1,5 +1,7 @@
 # twiz
 
+[![Release](https://badgen.net/github/tag/itzmeanjan/twiz)]()
+
 Your Twitter Account Data Analysis &amp; Visualization Tool &lt;3
 
 ![banner](./banner/banner.png)
