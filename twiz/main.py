@@ -10,6 +10,7 @@ from .model.following import getFollowings
 from .model.account import getAccountDisplayName
 from .model.like import getLikes
 from .model.ad.engagement.engagements import Engagements
+from .model.tweet.tweets import Tweets
 from .plot.util import (
     plotFollowersAndFollowings,
     plotFollowersAndFollowedFollowers,
@@ -30,6 +31,9 @@ from .plot.ad.engagement.viz import (
     plotTopXHashTagsInPromotedTweets,
     plotTopXHashTagsUsedByTopYAdvertisersInPromotedTweets,
     plotTopXTaggedAccountsInPromotedTweets
+)
+from .plot.tweet.viz import (
+    plotTopXHashTags
 )
 from time import time
 
@@ -93,11 +97,16 @@ def main():
         if not _parsedFollowers:
             raise RuntimeError('Failed to parse advertisement engagements')
 
+        _parsedTweets = parse(join(sink, 'data/tweet.js'))
+        if not _parsedTweets:
+            raise RuntimeError('Failed to parse tweets')
+
         _followers = getFollowers(_parsedFollowers)
         _followings = getFollowings(_parsedFollowings)
         _accountDisplayName = getAccountDisplayName(_account)
         _likes = getLikes(_parsedLikes)
         _engagements = Engagements.build(_parsedAdEngagement)
+        _tweets = Tweets.build(_parsedTweets)
         makeDirectory('plots')
 
         _success = [
@@ -191,7 +200,12 @@ def main():
                 _engagements,
                 20,
                 f'Top 20 @TaggedUsers in Promoted Tweets targeting {_accountDisplayName}',
-                f'plots/top20TaggedUsersInPromotedTweetsFor{_joinName(_accountDisplayName)}.png')
+                f'plots/top20TaggedUsersInPromotedTweetsFor{_joinName(_accountDisplayName)}.png'),
+            plotTopXHashTags(
+                _tweets,
+                20,
+                f'Top 20 #hashtags in Tweets by {_accountDisplayName}',
+                f'plots/top20HashTagsInTweetsBy{_joinName(_accountDisplayName)}.png')
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
