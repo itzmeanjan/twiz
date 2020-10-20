@@ -28,6 +28,9 @@ class Tweets:
         '''
         return Counter(chain.from_iterable(map(lambda e: e.hashtags, self.app)))
 
+    def topXHashTagsWithCount(self, x: int) -> List[Tuple[str, int]]:
+        return self.hashTagToCount().most_common(x)
+
 
 if __name__ == '__main__':
     print('[!] This is not an executable script')
