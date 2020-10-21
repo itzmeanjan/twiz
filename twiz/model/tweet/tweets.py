@@ -38,6 +38,9 @@ class Tweets:
         '''
         return Counter(chain.from_iterable(map(lambda e: map(lambda e: f'{e.name} ( @{e.screenName} )', e.mentions), self.all)))
 
+    def topXUserMentionsWithCount(self, x: int) -> List[Tuple[str, int]]:
+        return self.userMentionToCount().most_common(x)
+
 
 if __name__ == '__main__':
     print('[!] This is not an executable script')
