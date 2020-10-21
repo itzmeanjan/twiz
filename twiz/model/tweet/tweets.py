@@ -31,6 +31,13 @@ class Tweets:
     def topXHashTagsWithCount(self, x: int) -> List[Tuple[str, int]]:
         return self.hashTagToCount().most_common(x)
 
+    def userMentionToCount(self) -> Counter:
+        '''
+            Returns which Twitter user has been mentioned how many times
+            in tweets by USER
+        '''
+        return Counter(chain.from_iterable(map(lambda e: map(lambda e: f'{e.name} ( @{e.screenName} )', e.mentions), self.all)))
+
 
 if __name__ == '__main__':
     print('[!] This is not an executable script')
