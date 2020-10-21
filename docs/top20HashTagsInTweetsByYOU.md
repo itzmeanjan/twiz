@@ -6,6 +6,6 @@ We're picking up top X **#hashtags** used in all tweets by this user & plotting 
 
 ## Example
 
-Below is a demostrative plot for this category.
+Below is a demonstrative plot for this category.
 
 ![top20HashTagsInTweetsByAnjan_Roy](../plots/top20HashTagsInTweetsByAnjan_Roy.png)

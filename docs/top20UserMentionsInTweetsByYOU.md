@@ -6,6 +6,6 @@ We're picking up top X **@usermentions** by this user & plotting them as barchar
 
 ## Example
 
-Below is a demostrative plot for this category.
+Below is a demonstrative plot for this category.
 
 ![top20UserMentionsInTweetsByAnjan_Roy](../plots/top20UserMentionsInTweetsByAnjan_Roy.png)
