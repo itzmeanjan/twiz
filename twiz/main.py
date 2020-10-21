@@ -33,7 +33,8 @@ from .plot.ad.engagement.viz import (
     plotTopXTaggedAccountsInPromotedTweets
 )
 from .plot.tweet.viz import (
-    plotTopXHashTags
+    plotTopXHashTags,
+    plotTopXUserMentions
 )
 from time import time
 
@@ -205,7 +206,12 @@ def main():
                 _tweets,
                 20,
                 f'Top 20 #hashtags in Tweets by {_accountDisplayName}',
-                f'plots/top20HashTagsInTweetsBy{_joinName(_accountDisplayName)}.png')
+                f'plots/top20HashTagsInTweetsBy{_joinName(_accountDisplayName)}.png'),
+            plotTopXUserMentions(
+                _tweets,
+                20,
+                f'Top 20 @usermentions in Tweets by {_accountDisplayName}',
+                f'plots/top20UserMentionsInTweetsBy{_joinName(_accountDisplayName)}.png')
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
