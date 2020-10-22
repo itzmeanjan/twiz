@@ -65,6 +65,20 @@ def wordCloudOfHashTagsUsedInTweets(data: Tweets, sink: str) -> bool:
     except Exception:
         return False
 
+def wordCloudOfTaggedUsersInTweets(data: Tweets, sink: str) -> bool:
+    '''
+        Given all tagged users in tweets by this user, generates
+        word cloud with it
+    '''
+    try:
+        wc = WordCloud(width=1600, height=900, regexp=r'\@\w+')
+        wc.generate(data.getAllTaggedUsers())
+
+        wc.to_file(sink)
+
+        return True
+    except Exception:
+        return False
 
 if __name__ == '__main__':
     print('[!] This is not an executable script')

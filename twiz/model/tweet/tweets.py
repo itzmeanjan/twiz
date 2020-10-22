@@ -67,6 +67,13 @@ class Tweets:
         '''
         return '\n'.join(map(lambda e: f'#{e}', chain.from_iterable(map(lambda e: e.hashtags, self.all))))
 
+    def getAllTaggedUsers(self) -> str:
+        '''
+            Generating a concatenation of @user mentions, found in tweets by user,
+            user names are seperated by `\n`
+        '''
+        return '\n'.join(chain.from_iterable(map(lambda e: map(lambda e: f'@{e.screenName}', e.mentions), self.all)))
+
 
 if __name__ == '__main__':
     print('[!] This is not an executable script')
