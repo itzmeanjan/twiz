@@ -56,7 +56,7 @@ def wordCloudOfHashTagsUsedInTweets(data: Tweets, sink: str) -> bool:
         word cloud with it
     '''
     try:
-        wc = WordCloud()
+        wc = WordCloud(width=1600, height=900, regexp=r'\#\w+')
         wc.generate(data.getAllHashTags())
 
         wc.to_file(sink)
