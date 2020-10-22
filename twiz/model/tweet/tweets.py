@@ -60,6 +60,13 @@ class Tweets:
 
         return buffer
 
+    def getAllHashTags(self) -> str:
+        '''
+            Retrieves all hashtags by concatenating them with `\n`, to be used
+            for creating word cloud of hashtags mostly used by this user
+        '''
+        return '\n'.join(map(lambda e: f'#{e}', chain.from_iterable(map(lambda e: e.hashtags, self.all))))
+
 
 if __name__ == '__main__':
     print('[!] This is not an executable script')
