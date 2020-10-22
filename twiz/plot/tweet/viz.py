@@ -3,6 +3,7 @@
 import seaborn as sns
 from matplotlib import pyplot as plt
 from twiz.model.tweet.tweets import Tweets
+from wordcloud import WordCloud
 
 
 def plotTopXHashTags(data: Tweets, x: int, title: str, sink: str):
@@ -43,6 +44,22 @@ def plotTopXUserMentions(data: Tweets, x: int, title: str, sink: str):
 
         fig.savefig(sink, pad_inches=.8)
         plt.close(fig)
+
+        return True
+    except Exception:
+        return False
+
+
+def wordCloudOfHashTagsUsedInTweets(data: Tweets, sink: str) -> bool:
+    '''
+        Given all hash tags used in tweets by this user, generates
+        word cloud with it
+    '''
+    try:
+        wc = WordCloud()
+        wc.generate(data.getAllHashTags())
+
+        wc.to_file(sink)
 
         return True
     except Exception:
