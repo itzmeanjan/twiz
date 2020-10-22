@@ -34,7 +34,8 @@ from .plot.ad.engagement.viz import (
 )
 from .plot.tweet.viz import (
     plotTopXHashTags,
-    plotTopXUserMentions
+    plotTopXUserMentions,
+    wordCloudOfHashTagsUsedInTweets
 )
 from time import time
 
@@ -211,7 +212,10 @@ def main():
                 _tweets,
                 20,
                 f'Top 20 @usermentions in Tweets by {_accountDisplayName}',
-                f'plots/top20UserMentionsInTweetsBy{_joinName(_accountDisplayName)}.png')
+                f'plots/top20UserMentionsInTweetsBy{_joinName(_accountDisplayName)}.png'),
+            wordCloudOfHashTagsUsedInTweets(
+                _tweets,
+                f'plots/wordCloudOfHashTagsInTweetsBy{_joinName(_accountDisplayName)}.png')
         ]
 
         print('[+]Obtained success : {:.2f} %, in {:.2f} s'.format(
