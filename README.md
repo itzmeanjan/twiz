@@ -4,7 +4,7 @@
 
 Your Twitter Account Data Analysis &amp; Visualization Tool &lt;3
 
-![banner](./banner/banner.png)
+![banner](./plots/wordCloudOfHashTagsInTweetsByAnjan_Roy.png)
 
 ## Table of Contents
 
@@ -71,5 +71,6 @@ twiz path-to-twitter-data.zip sink/
 - Tweets
     - [x] [Top X **#HashTags** in tweets by YOU](./docs/top20HashTagsInTweetsByYOU.md)
     - [x] [Top X **@UserMentions** in tweets by YOU](./docs/top20UserMentionsInTweetsByYOU.md)
+    - [x] [Word Cloud of **#HashTags** in tweets by YOU](./docs/wordCloudOfHashTagsInTweetsByYOU.md)
 
 **This section will keep getting populated ;)**
