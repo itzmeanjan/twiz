@@ -72,5 +72,6 @@ twiz path-to-twitter-data.zip sink/
     - [x] [Top X **#HashTags** in tweets by YOU](./docs/top20HashTagsInTweetsByYOU.md)
     - [x] [Top X **@UserMentions** in tweets by YOU](./docs/top20UserMentionsInTweetsByYOU.md)
     - [x] [Word Cloud of **#HashTags** in tweets by YOU](./docs/wordCloudOfHashTagsInTweetsByYOU.md)
+    - [x] [Word Cloud of **@MentionedUsers** in tweets by YOU](./docs/wordCloudOfMentionedUsersInTweetsByYOU.md)
 
 **This section will keep getting populated ;)**

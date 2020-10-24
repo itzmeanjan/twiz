@@ -7,7 +7,7 @@
     Author: Anjan Roy <anjanroy@yandex.com>
     License: CC0-1.0
 '''
-__version__ = '0.3.3'
+__version__ = '0.3.4'
 
 from warnings import filterwarnings
 
