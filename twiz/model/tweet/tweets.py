@@ -74,6 +74,13 @@ class Tweets:
         '''
         return '\n'.join(chain.from_iterable(map(lambda e: map(lambda e: f'@{e.screenName}', e.mentions), self.all)))
 
+    def getAllTweets(self) -> str:
+        '''
+            Concatenates all tweets from this user account, to be used for
+            generating tweet word cloud
+        '''
+        return '\n'.join(map(lambda e: e.text, self.all))
+
 
 if __name__ == '__main__':
     print('[!] This is not an executable script')
