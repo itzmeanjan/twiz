@@ -92,7 +92,8 @@ class Tweets:
             Concatenates all tweets from this user account, to be used for
             generating tweet word cloud
         '''
-        return '\n'.join(map(lambda e: e.text, self.all))
+        return '\n'.join(map(lambda e: self.extractHashTags(
+            self.extractTags(e.text)), self.all))
 
 
 if __name__ == '__main__':
