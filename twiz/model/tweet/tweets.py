@@ -8,6 +8,7 @@ from .tweet import Tweet
 from itertools import chain
 from collections import Counter
 from datetime import timedelta, datetime
+from re import compile as regCompile, Pattern, sub as replace
 
 
 class Tweets:
@@ -73,6 +74,18 @@ class Tweets:
             user names are seperated by `\n`
         '''
         return '\n'.join(chain.from_iterable(map(lambda e: map(lambda e: f'@{e.screenName}', e.mentions), self.all)))
+
+    def _tagRegex(self) -> Pattern:
+        return regCompile(r'(@\w+)')
+
+    def extractTags(self, text: str) -> str:
+        return replace(self._tagRegex(), '', text)
+
+    def _hashTagRegex(self) -> Pattern:
+        return regCompile(r'(\#\w+)')
+
+    def extractHashTags(self, text: str) -> List[str]:
+        return replace(self._hashTagRegex(), '', text)
 
     def getAllTweets(self) -> str:
         '''
